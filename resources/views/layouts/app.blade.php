@@ -109,7 +109,85 @@
   <h2 class="display-4 text-white">Bootstrap vertical nav</h2>
   <p class="lead text-white mb-0">Build a fixed sidebar using Bootstrap 4 vertical navigation and media objects.</p> 
   <div class="separator"></div>
-  <div class="row text-white">
+  <div class="text-white">
+
+    <div class="overflow-x">
+      <table style="width:100%;" id="filtertable" class="table cust-datatable dataTable no-footer">
+        <thead>
+          <tr>
+            <th style="min-width:50px;">ID</th>
+            <th style="min-width:150px;">Name</th>
+            <th style="min-width:150px;">Mode</th>
+            <th style="min-width:100px;">Event</th>
+            <th style="min-width:100px;">Date</th>
+            <th style="min-width:150px;">Status</th>
+            <th style="min-width:150px;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Dummy</td>
+            <td><span class="mode mode_process">Processing</span></td>
+            <td>Journey</td>
+            <td>17-Apr-2020</td>
+            <td><span class="mode mode_on">Active</span></td>
+            <td>
+              <div class="btn-group">
+                <a class="dropdown-toggle dropdown_icon" data-toggle="dropdown">
+                  <i class="fa fa-pencil-square-o"></i> 
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="#" target="_blank">
+                        Dummy Details
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                        Dummy Details
+                    </a>
+                  </li>  
+                  <li>
+                    <a href="#" target="_blank">
+                        Dummy Details
+                    </a>
+                  </li>  
+                </ul>
+              </div>
+              <span class="actionCust">
+                <a href="#"><i class="fa fa-line-chart"></i></a>
+              </span>
+              <div class="btn-group">
+                <a class="dropdown-toggle dropdown_icon" data-toggle="dropdown">
+                  <i class="fa fa-ellipsis-h"></i>
+                </a>
+                <ul class="dropdown-menu dropdown_more">
+                  <li>
+                    <a href="#" target="_black">
+                      <i class="fa fa-clone"></i>Duplicate
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_black">
+                      <i class="fa fa-trash"></i> Delete
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_black">
+                      <i class="fa fa-list"></i>Activity</a>
+                    </li>
+                </ul>
+              </div>
+            </td>
+          </tr>      
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- <div class="row text-white">
     <div class="col-lg-7">
       <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
         dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
@@ -137,7 +215,7 @@
         dolor.
       </p>
     </div>
-  </div>
+  </div> -->
 
 </div>
 <!-- End demo content -->
