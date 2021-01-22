@@ -8,11 +8,6 @@ use App\Tracker;
 use DB;
 class TrackerManagementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
       // $data['task_list_table'] = TrackerManagement::where('key', 'LIKE', '%aboutus%')->get();
@@ -23,22 +18,11 @@ class TrackerManagementController extends Controller
        return view("manager.tracker-management.index", $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function add()
     {
         return view("manager.tracker-management.add_edit");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // if($request->validate([$request->field_title=>'required'])){

@@ -1,7 +1,7 @@
 @extends('layouts.app')
+@section('title', 'Tracker Management')
+@section('caption', '(Caption..)')
 @section('content')
-<h4 class="text-white">Tracker Management</h4>
-<p class="text-white mb-3">(Caption..)</p>
 <div class="card">
   <div class="card-body">
     <div class="card-body">

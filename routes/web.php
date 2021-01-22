@@ -45,3 +45,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     'uses' => 'Manager\TrackerManagementController@destroy',
     'as'   => 'manager.tracker-management.destroy'
   ]);
+
+  // SCORECARD
+  Route::get('/scorecard',[
+    'uses' => 'Manager\ScorecardController@index',
+    'as'   => 'manager.scorecard.index'
+  ]);

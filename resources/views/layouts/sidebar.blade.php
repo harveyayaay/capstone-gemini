@@ -38,9 +38,15 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="{{route('manager.scorecard.index')}}" class="nav-link text-dark">
+        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+        Scorecard
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="#" class="nav-link text-dark">
         <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Performance Management
+        Productivity Report
       </a>
     </li>
     <li class="nav-item">

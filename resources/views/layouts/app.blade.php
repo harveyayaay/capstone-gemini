@@ -39,7 +39,7 @@
 
 <div class="page-content p-5" id="content">
   <!-- Toggle button -->
-  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
+  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars"></i><small class="text-uppercase font-weight-bold"></small></button>
 
   <!-- Demo content -->
   <h4 class="text-white">@yield('title')</h4>
@@ -91,6 +91,41 @@
       }
     })
   })();
+  
+  // To set mindate in enddate
+  function customRange(input) 
+  { 
+  return {
+          minDate: (input.id == "end_date" ? $("#start_date").datepicker("getDate") : new Date())
+        }; 
+  }
+
+  // To set maxdate in startdate
+  function customRangeStart(input) 
+  { 
+  return {
+          maxDate:(input.id == "start_date" ? $("#end_date").datepicker("getDate") : null)
+        }; 
+  }
+
+  $(document).ready(function() {
+
+    $('#start_date').datepicker(
+    {
+        beforeShow: customRangeStart,
+        maxDate: null,
+        dateFormat: "yy-mm-dd",
+        changeYear: true
+    });
+
+    $('#end_date').datepicker(
+    {
+        beforeShow: customRange,
+        dateFormat: "yy-mm-dd",
+        changeYear: true
+    });
+  });
+
 </script>
 @yield('inner_custom_js')
 @endsection
