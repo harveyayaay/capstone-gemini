@@ -31,7 +31,7 @@
         <p class="font-weight-normal text-muted mb-0">Web developer</p>
       </div>
     </div>
-  </div>
+  </div>  
 
   @include('layouts.sidebar')
 </div>
@@ -46,9 +46,14 @@
   <p class="text-white mb-3">@yield('caption')</p> 
   <!-- <div class="separator"></div> -->
   <!-- Page content holder -->
-    @yield('content')
+  
+    
+      @yield('content')
+    </div>
+  </div>
+  @include('layouts.modal.delete-modal')
   <!-- End page content -->
-
+@yield('custom_js')
 @stack('modals')
 @livewireScripts
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -57,4 +62,36 @@
 <script src="main.js"></script>
 </body>
 </html>
+
+@section('custom_js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
+  (function(){
+    $('#delete-modal').on('shown.bs.modal', function (e) {
+      var btn = $(e.relatedTarget);
+      var url = btn.data('url');
+      $('#delete-form').attr('action', url)
+    })
+    $('#approval_status').on('change',function(){
+      $this = $(this);
+      if($this.val() == 'declined'){
+        $('.approval-status-message').removeClass('d-none');
+      }
+      else{
+        $('.approval-status-message').addClass('d-none');
+      }
+    });
+    $('#approval_message').on('change',function(){
+      $this = $(this);
+      if($this.val() == 'other'){
+        $('.custom-message').removeClass('d-none');
+      }
+      else{
+        $('.custom-message').addClass('d-none');
+      }
+    })
+  })();
+</script>
+@yield('inner_custom_js')
+@endsection
 
