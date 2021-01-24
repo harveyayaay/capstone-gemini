@@ -17,10 +17,9 @@
     <link rel="stylesheet" href="style.css">
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    @livewireStyles
 </head>
 <body>
- 
+@livewireStyles
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
@@ -42,6 +41,7 @@
   <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars"></i><small class="text-uppercase font-weight-bold"></small></button>
 
   <!-- Demo content -->
+
   <h4 class="text-white">@yield('title')</h4>
   <p class="text-white mb-3">@yield('caption')</p> 
   <!-- <div class="separator"></div> -->

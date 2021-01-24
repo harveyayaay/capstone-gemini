@@ -16,7 +16,7 @@
     </div>
   </div>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Dashboard</p>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Manager Navigation</p>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -26,7 +26,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{route('manager.tracker-management.index')}}" class="nav-link text-dark">
+      <a href="/admin/tracker-management" class="nav-link text-dark">
         <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
         Tracker Management
       </a>
@@ -38,7 +38,42 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{route('manager.scorecard.index')}}" class="nav-link text-dark">
+      <a href="/admin/scorecard" class="nav-link text-dark">
+        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+        Scorecard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/productivity-report" class="nav-link text-dark">
+        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+        Productivity Report
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/reports-management" class="nav-link text-dark">
+        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+        Reports Management
+      </a>
+    </li>
+  </ul>
+
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Supervisor Navigation</p>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="/supervisor" class="nav-link text-dark bg-light">
+        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/supervisor/activity-monitoring" class="nav-link text-dark">
+        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+        Activity Monitoring
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
         <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
         Scorecard
       </a>
@@ -52,12 +87,12 @@
     <li class="nav-item">
       <a href="#" class="nav-link text-dark">
         <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Scheduling Management
+        Scheduling
       </a>
     </li>
   </ul>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+  <!-- <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -84,6 +119,6 @@
         line charts
       </a>
     </li>
-  </ul>
+  </ul> -->
 </div>
 <!-- End vertical navbar -->

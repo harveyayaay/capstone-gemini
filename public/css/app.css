@@ -192479,6 +192479,34 @@ body {
   }
 }
 
+.myaccordion{
+  width:100%;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+}
+.myaccordion .card,
+.myaccordion .card:last-child .card-header{
+  border:none;
+}
+.myaccordion .card ul{
+  padding-left: 20px;
+}
+.myaccordion .card-header{
+  border-bottom-color:#edeff0;
+  background:transparent;
+}
+.myaccordion .btn{
+  width:100%;
+}
+.myaccordion .btn-link:hover,
+.myaccordion .btn-link:focus{
+  text-decoration: none;
+}
+.myaccordion li + li{
+  margin-top:10px;
+}
+
+  
+
 
 
 
