@@ -27,6 +27,14 @@
     return obj;
   }
 
+  $(function() { 
+    $('#sidebarCollapse').on('click', function() {
+      $('#sidebar, #content').toggleClass('active');
+    });
+  });
+  
+  
+
   function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
 
