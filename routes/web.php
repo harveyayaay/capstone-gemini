@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
 use App\Http\Controllers\Manager\ScorecardController;
 use App\Http\Controllers\Manager\ProductivityReportController;
@@ -26,7 +27,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){
     // DASHBOARD
-    Route::get('/admin', [ManagerDashboardController::class, 'index']);
+    Route::get('/dashboard', [ManagerDashboardController::class, 'index']);
 
     // TRACKER MANAGEMENT
     Route::get('/admin/tracker-management', [TrackerManagementController::class, 'index']);
@@ -55,20 +56,20 @@ Route::middleware('auth')->group(function(){
 
     // ACTIVITY MONITORING
     Route::get('/supervisor/activity-monitoring', [ActivityMonitoringController::class, 'index']);
-    Route::get('/supervisor/tracker-management/add', [TrackerManagementController::class, 'add']);
-    Route::post('/supervisor/tracker-management/store', [TrackerManagementController::class, 'store']);
-    Route::get('/supervisor/tracker-management/edit/{id}', [TrackerManagementController::class, 'edit']);
-    Route::post('/supervisor/tracker-management/update/{id}', [TrackerManagementController::class, 'update']);
+    Route::get('/supervisor/activity-monitoring/add-task', [TrackerManagementController::class, 'add']);
+    Route::post('/supervisor/activity-monitoring/store', [TrackerManagementController::class, 'store']);
+    // Route::get('/supervisor/activity-monitoring/edit/{id}', [TrackerManagementController::class, 'edit']);
+    Route::post('/supervisor/activity-monitoring/update/{id}', [TrackerManagementController::class, 'update']);
     // Route::post('/tracker-management/destroy/{id}', [TrackerManagementController::class, 'destroy']);
 
     // SCORECARD
-    Route::get('/admin/scorecard', [ScorecardController::class, 'index']);
+    Route::get('/supervisor/scorecard', [ScorecardController::class, 'index']);
 
     // PRODUCTIVITY REPORT
-    Route::get('/admin/productivity-report', [ProductivityReportController::class, 'index']);
+    Route::get('/supervisor/productivity-report', [ProductivityReportController::class, 'index']);
     
-    // REPORTS MANAGEMENT
-    Route::get('/admin/reports-management', [ReportsManagementController::class, 'index']);
+    // SCHEDULING MANAGEMENT
+    Route::get('/supervisor/reports-management', [ReportsManagementController::class, 'index']);
   });
 });
 

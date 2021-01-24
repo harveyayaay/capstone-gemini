@@ -57,7 +57,7 @@
     </li>
   </ul>
 
-  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Supervisor Navigation</p>
+  <!-- <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Supervisor Navigation</p>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -90,7 +90,7 @@
         Scheduling
       </a>
     </li>
-  </ul>
+  </ul> -->
 
   <!-- <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
 
