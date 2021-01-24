@@ -20,7 +20,7 @@ use App\Http\Controllers\Supervisor\ActivityMonitoringController;
 */
 
 Route::get('/', function () {
-    return view('tracker-management');
+  return redirect()->to('/login');
 });
 
 Route::middleware('auth')->group(function(){
