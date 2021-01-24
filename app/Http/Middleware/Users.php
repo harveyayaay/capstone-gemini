@@ -17,14 +17,14 @@ class Users
    */
   public function handle(Request $request, Closure $next, $user)
   {
-    if(Auth::user()->position === "Manager" && $user === "Manager")
+    if(Auth::user()->position === "Manager")
     {
       return $next($request);
     }
-    else if(Auth::user()->position === "Supervisor" && $user === "Supervisor")
+    else if(Auth::user()->position === "Supervisor")
     {
       return $next($request);
     }
-    return abort(403, 'Unauthorized');
+      return abort(403, 'Unauthorized');
   }
 }
