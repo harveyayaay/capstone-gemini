@@ -14,7 +14,7 @@
         <p class="font-weight-normal text-muted mb-0">Web developer</p>
       </div>
     </div>
-  </div>
+  </div> 
 
   <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Manager Navigation</p>
 
@@ -27,20 +27,26 @@
     </li>
     <li class="nav-item">
       <a href="/admin/tracker-management" class="nav-link text-dark">
-        <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+        <i class="fa fa-address-card mr-3 text-primary fa- fw"></i>
         Tracker Management
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
+      <a href="/admin/employee-management" class="nav-link text-dark">
         <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
         Employee Management
       </a>
     </li>
     <li class="nav-item">
-      <a href="/admin/scorecard" class="nav-link text-dark">
+      <a href="/admin/scorecard-management" class="nav-link text-dark">
         <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Scorecard
+        Scorecard Management
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="/admin/generate-report" class="nav-link text-dark">
+        <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
+        Generate Report
       </a>
     </li>
     <li class="nav-item">
@@ -50,14 +56,14 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="/admin/reports-management" class="nav-link text-dark">
+      <a href="/admin/scorecard" class="nav-link text-dark">
         <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Reports Management
+        Scorecard Report
       </a>
     </li>
   </ul>
 
-  <!-- <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Supervisor Navigation</p>
+  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Supervisor Navigation</p>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -67,7 +73,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="/supervisor/activity-monitoring" class="nav-link text-dark">
+      <a href="/supervisor/activity-tracker" class="nav-link text-dark">
         <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
         Activity Monitoring
       </a>
@@ -90,7 +96,7 @@
         Scheduling
       </a>
     </li>
-  </ul> -->
+  </ul>
 
   <!-- <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
 

@@ -35,7 +35,8 @@ class TrackerManagementController extends Controller
           'process_time' => $request->field_process_time,
           'sla' => $request->field_sla,
           'level' => $request->field_level,
-          'status' => 'Active'];
+          'status' => 'Active'
+        ];
       $store = DB::table('task_lists')->insert($store_data);
       $alert = [
           'type'    => 'success',

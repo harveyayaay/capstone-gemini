@@ -35,6 +35,7 @@ class User extends Authenticatable
         'position',
         'hiredate',
         'status',
+        'profile_photo_path',
     ];
 
     /**

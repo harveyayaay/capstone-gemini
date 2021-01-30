@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
 
-class ScorecardController extends Controller
+class GenerateReportController extends Controller
 {
   public function index()
   {
-     return view("manager.scorecard.index");
+     return view("manager.generate-report.index");
   }
 }

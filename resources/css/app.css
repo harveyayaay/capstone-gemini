@@ -1,3 +1,6 @@
+/* Tailwind */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+/* MDB  */
+@import '~mdb-ui-kit/css/mdb.min.css';

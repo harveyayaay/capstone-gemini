@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         'position' => 'Manager',
         'status' => 'Active',
         'password' => Hash::make("qwer1234"),
+        'profile_photo_path' => 'photos/IHoYLyrAkh6SA5mfz6hnEYfxWp7lD4Ua1j7eDiEb.png',
       ]);   
     }
 }
