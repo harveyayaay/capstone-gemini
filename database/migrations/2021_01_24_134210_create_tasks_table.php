@@ -17,14 +17,13 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->dateTime('current_date');
             $table->string('type');
-            $table->string('client_id');
+            $table->string('case_num');
             $table->date('date_received');
-            $table->time('time_start');
-            $table->time('time_hold');
-            $table->time('time_continue');
-            $table->time('time_end');
-            $table->string('process_duration');
-            $table->string('hold_duration');
+            $table->dateTime('time_start');
+            $table->dateTime('time_continue');
+            $table->dateTime('time_end');
+            $table->string('process_duration')->nullable();
+            $table->string('hold_duration')->nullable();
             $table->string('status');
             // employee id
             $table->integer('empid')->unsigned();

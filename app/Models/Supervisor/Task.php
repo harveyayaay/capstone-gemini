@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    use HasFactory;
+  protected $fillable = [
+    'current_date',
+    'type',
+    'case_num',
+    'date_received',
+    'time_start',
+    'time_hold',
+    'time_continue',
+    'time_end',
+    'process_duration',
+    'hold_duration',
+    'status',
+    'empid',
+  ];
 }

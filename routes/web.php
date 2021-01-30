@@ -3,12 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
-use App\Http\Controllers\Manager\ScorecardController;
+use App\Http\Controllers\Manager\EmployeeManagementController;
+use App\Http\Controllers\Manager\ScorecardManagementController;
+use App\Http\Controllers\Manager\GenerateReportController;
+
 use App\Http\Controllers\Manager\ProductivityReportController;
-use App\Http\Controllers\Manager\ReportsManagementController;
+
+// use App\Http\Controllers\Manager\ScorecardController;
 
 use App\Http\Controllers\Supervisor\SupervisorDashboardController;
-use App\Http\Controllers\Supervisor\ActivityMonitoringController;
+use App\Http\Controllers\Supervisor\ActivityTrackerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +28,7 @@ Route::get('/', function () {
   return redirect()->to('/login');
 });
 
+// MANAGER
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){
     // DASHBOARD
@@ -37,30 +42,41 @@ Route::middleware('auth')->group(function(){
     Route::post('/admin/tracker-management/update/{id}', [TrackerManagementController::class, 'update']);
     // Route::post('/tracker-management/destroy/{id}', [TrackerManagementController::class, 'destroy']);
 
+    // EMPLOYEE MANAGEMENT
+    Route::get('/admin/employee-management', [EmployeeManagementController::class, 'index']);
+    Route::get('/admin/employee-management/add', [EmployeeManagementController::class, 'add']);
+    Route::post('/admin/employee-management/store', [EmployeeManagementController::class, 'store']);
+    Route::get('/admin/employee-management/edit/{id}', [EmployeeManagementController::class, 'edit']);
+    Route::post('/admin/employee-management/update/{id}', [EmployeeManagementController::class, 'update']);
+
+    // SCORECARD MANAGEMENT
+    Route::get('/admin/scorecard-management', [ScorecardManagementController::class, 'index']);
+
+    // GENERATE REPORT
+    Route::get('/admin/generate-report', [GenerateReportController::class, 'index']);
+    
+
     // SCORECARD
     Route::get('/admin/scorecard', [ScorecardController::class, 'index']);
 
     // PRODUCTIVITY REPORT
     Route::get('/admin/productivity-report', [ProductivityReportController::class, 'index']);
     
-    // REPORTS MANAGEMENT
-    Route::get('/admin/reports-management', [ReportsManagementController::class, 'index']);
   });
 });
 
+// SUPERVISOR
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Supervisor')->group(function(){
 
     // DASHBOARD
     Route::get('/supervisor', [SupervisorDashboardController::class, 'index']);
 
-    // ACTIVITY MONITORING
-    Route::get('/supervisor/activity-monitoring', [ActivityMonitoringController::class, 'index']);
-    Route::get('/supervisor/activity-monitoring/add-task', [TrackerManagementController::class, 'add']);
-    Route::post('/supervisor/activity-monitoring/store', [TrackerManagementController::class, 'store']);
-    // Route::get('/supervisor/activity-monitoring/edit/{id}', [TrackerManagementController::class, 'edit']);
-    Route::post('/supervisor/activity-monitoring/update/{id}', [TrackerManagementController::class, 'update']);
-    // Route::post('/tracker-management/destroy/{id}', [TrackerManagementController::class, 'destroy']);
+    // ACTIVITY TRACKER
+    Route::get('/supervisor/activity-tracker', [ActivityTrackerController::class, 'index']);
+    Route::get('/supervisor/activity-tracker/add-task', [ActivityTrackerController::class, 'add']);
+    Route::post('/supervisor/activity-tracker/store/', [ActivityTrackerController::class, 'store']);
+    Route::post('/supervisor/activity-tracker/update/{id}/{status}', [ActivityTrackerController::class, 'update']);
 
     // SCORECARD
     Route::get('/supervisor/scorecard', [ScorecardController::class, 'index']);
