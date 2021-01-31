@@ -41,7 +41,6 @@ class FileUpload extends Component
         //   'profile_photo_path' => $this->photo->store('photos'),
         // ];
 
-        dd('ngioiiii');
 
         $store = DB::table('users')->where('id',$this->userid)->update($update_photo);
     }
