@@ -22,15 +22,15 @@ class ActivityTrackerController extends Controller
     {
       // kahapon at ngayon
       $date_from = date('Y-m-d 18:00:00', strtotime('-1 day', strtotime(date('Y-m-d'))));
-      $date_to = date('Y-m-d 9:00:00');
+      // $date_to = date('Y-m-d 9:00:00');
+      $date_to = date('Y-m-d 18:00:00');
     }
+
     $data['countOngoing'] = DB::table('tasks')
       ->where('status','=','Ongoing')
-      ->where('current_date','>=',$date_from)
-      ->where('current_date','<=',$date_to)
       ->where('empid','<=',Auth::id())
       ->count();
-      
+    // dd($data['countOngoing']);
       // dd($data['count']);
     if($data['countOngoing'] > 0)
     {

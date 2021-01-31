@@ -14,12 +14,15 @@
         <option value='Productivity'>List of out of SLA Activities</option>
       </select>
     </div>
-    @if($reports == 'Completed Activities')
-      
+    @if($reports == 'Completed Applications')
+      @livewire('generate.generate-activities', ["status" => 'Completed', "reference" => 'Application'])
+    @elseif($reports == 'Completed Activities')
+      @livewire('generate.generate-activities', ["status" => 'Completed', "reference" => 'All'])
+    @elseif($reports == 'Incomplete Activities')
+      @livewire('generate.generate-activities', ["status" => 'Incomplete', "reference" => 'All'])
     @elseif($reports == 'Productivity')
       dd('Productivity')
     @else
-      @livewire('generate.completed-activities')
 
     
 
