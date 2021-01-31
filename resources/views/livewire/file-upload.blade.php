@@ -3,7 +3,6 @@
     
     <form wire:submit.prevent="save">
         <button id="btnfile"> 
-        @if($photo)
         <div class="row">
             <div class="content rounded-circle img-thumbnail">
               <div class="content-overlay"></div>
@@ -14,8 +13,7 @@
             </div>
           </div>
           <button type="submit" class="btn btn-primary">Save Photo</button>
-        @else
-          <div class="row">
+          <!-- <div class="row">
             <div class="content rounded-circle img-thumbnail">
               <div class="content-overlay"></div>
               <img src="{{$photo_exists ? url('storage/'.$photo_path) : url('storage/photos/IHoYLyrAkh6SA5mfz6hnEYfxWp7lD4Ua1j7eDiEb.png')}}"  class="rounded-circle shadow-sm  img-thumbnail img-fluid imgsize">
@@ -24,8 +22,7 @@
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary invisible">Save Photo</button>
-        @endif
+          <button type="submit" class="btn btn-primary invisible">Save Photo</button> -->
         </button> 
         <div class="wrapper">
             <input type="file" id="uploadfile" wire:model="photo" hidden/> 
