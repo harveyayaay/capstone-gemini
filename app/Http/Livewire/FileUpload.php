@@ -40,7 +40,7 @@ class FileUpload extends Component
         // $update_photo = [
         //   'profile_photo_path' => $this->photo->store('photos'),
         // ];
-          dd('i aint tisoy, im pinoy');
+          dd('i aint tisoy, im pinoy - ez mil');
 
         $store = DB::table('users')->where('id',$this->userid)->update($update_photo);
     }
