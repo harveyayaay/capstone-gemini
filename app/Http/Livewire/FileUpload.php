@@ -33,6 +33,7 @@ class FileUpload extends Component
 
     public function save()
     {      
+      dd('sdfksdjf');
         // $this->validate([
         //     'photo' => 'image|max:1024', // 1MB Max
         // ]);
