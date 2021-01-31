@@ -33,12 +33,12 @@ class FileUpload extends Component
 
     public function save()
     {      
-        $this->validate([
-            'photo' => 'image|max:1024', // 1MB Max
-        ]);
-        $update_photo = [
-          'profile_photo_path' => $this->photo->store('photos'),
-        ];
+        // $this->validate([
+        //     'photo' => 'image|max:1024', // 1MB Max
+        // ]);
+        // $update_photo = [
+        //   'profile_photo_path' => $this->photo->store('photos'),
+        // ];
 
         $store = DB::table('users')->where('id',$this->userid)->update($update_photo);
     }

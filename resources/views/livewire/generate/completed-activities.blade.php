@@ -1,5 +1,10 @@
 <div>
     {{-- In work, do what you enjoy. --}}
+      <div class="d-flex justify-content-end mb-2">
+        <input type="date" class="form-control-sm m-1 col-2" value="{{date('Y-m-d', strtotime(date('Y-m')))}}">
+        <input type="date" class="form-control-sm m-1 col-2" value="{{date('Y-m-d')}}"> 
+        <input type="submit" class="form-control-sm col-1 btn-primary"> 
+      </div>
       <table class="table table-sm text-center">
         <thead>
           <tr>

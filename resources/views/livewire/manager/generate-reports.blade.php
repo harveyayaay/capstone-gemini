@@ -6,7 +6,7 @@
         <option>Scorecard</option>
         <option>Productivity</option>
       </select> -->
-      <select name="reports" wire:model="reports" id="">
+      <select name="reports" wire:model="reports" id="" class="form-control-sm col-3">
         <option selected hidden>- Select Report to Generate-</option>
         <option value='Completed Applications'>List of Completed Applications</option>
         <option value='Completed Activities'>List of Completed Activities</option>
