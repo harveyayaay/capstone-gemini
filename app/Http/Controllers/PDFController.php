@@ -27,9 +27,13 @@ class PDFController extends Controller
                 ->where('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($date_to))))
                 ->get();
         }
-    $pdf = PDF::loadView('generate-pdf-activity',$data)->setPaper('a4', 'landscape');;
-    return view('generate-pdf-activity',$data);
+    $pdf = PDF::loadView('generate-pdf-activity',$data)->setPaper('legal', 'landscape');
+    // $pdf = PDF::loadView('generate-pdf-activity',$data)->setPaper('legal', 'portrait');
+
+    // html view 
+    // return view('generate-pdf-activity',$data);
+
     // download PDF file with download method
-    // return $pdf->download('pdf_file.pdf');
+    return $pdf->download('pdf_file.pdf');
     }
 }
