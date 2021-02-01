@@ -20,8 +20,6 @@
       @livewire('generate.generate-activities', ["status" => 'Completed', "reference" => 'All'])
     @elseif($reports == 'Incomplete Activities')
       @livewire('generate.generate-activities', ["status" => 'Incomplete', "reference" => 'All'])
-    @elseif($reports == 'Productivity')
-      dd('Productivity')
     @else
 
     

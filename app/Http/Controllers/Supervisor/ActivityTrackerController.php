@@ -95,7 +95,7 @@ class ActivityTrackerController extends Controller
   {
     // store
 
-    if($status == 'Hold' || $status == 'End')
+    if($status == 'Hold' || $status == 'End' || $status == 'Incomplete')
     {
       $data = Task::find($id);
       $data->time_end = date('Y-m-d H:i:s');
@@ -122,8 +122,10 @@ class ActivityTrackerController extends Controller
 
       if($status == 'Hold')
         $data->status = 'Hold';
-      else 
+      else if($status == 'Completed')
         $data->status = 'Completed';
+      else 
+        $data->status = 'Incomplete';
       
       $data->save();
     }
