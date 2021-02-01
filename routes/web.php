@@ -6,6 +6,7 @@ use App\Http\Controllers\Manager\TrackerManagementController;
 use App\Http\Controllers\Manager\EmployeeManagementController;
 use App\Http\Controllers\Manager\ScorecardManagementController;
 use App\Http\Controllers\Manager\GenerateReportController;
+use App\Http\Controllers\PDFController;
 
 use App\Http\Controllers\Manager\ProductivityReportController;
 
@@ -54,6 +55,10 @@ Route::middleware('auth')->group(function(){
 
     // GENERATE REPORT
     Route::get('/admin/generate-report', [GenerateReportController::class, 'index']);
+    
+    // PDF
+    // Route::get('/generate-pdf-activity', [PDFController::class, 'indexActivity']);
+    Route::get('/generate-pdf-activity/{reference}/{status}/{date_from}/{date_to}', [PDFController::class, 'indexActivity']);
     
 
     // SCORECARD
