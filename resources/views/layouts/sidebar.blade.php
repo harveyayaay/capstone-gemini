@@ -91,9 +91,9 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
+      <a href="/supervisor/generate-report" class="nav-link text-dark">
         <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-        Scheduling
+        Generate Report
       </a>
     </li>
   </ul>

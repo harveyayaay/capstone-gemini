@@ -5,7 +5,7 @@ use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
 use App\Http\Controllers\Manager\EmployeeManagementController;
 use App\Http\Controllers\Manager\ScorecardManagementController;
-use App\Http\Controllers\Manager\GenerateReportController;
+use App\Http\Controllers\Manager\ManagerGenerateReportController;
 use App\Http\Controllers\PDFController;
 
 use App\Http\Controllers\Manager\ProductivityReportController;
@@ -14,6 +14,7 @@ use App\Http\Controllers\Manager\ProductivityReportController;
 
 use App\Http\Controllers\Supervisor\SupervisorDashboardController;
 use App\Http\Controllers\Supervisor\ActivityTrackerController;
+use App\Http\Controllers\Supervisor\SupervisorGenerateReportController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,12 +53,12 @@ Route::middleware('auth')->group(function(){
 
     // SCORECARD MANAGEMENT
     Route::get('/admin/scorecard-management', [ScorecardManagementController::class, 'index']);
+    Route::get('/admin/scorecard-management/add', [ScorecardManagementController::class, 'add']);
 
     // GENERATE REPORT
-    Route::get('/admin/generate-report', [GenerateReportController::class, 'index']);
+    Route::get('/admin/generate-report', [ManagerGenerateReportController::class, 'index']);
     
     // PDF
-    // Route::get('/generate-pdf-activity', [PDFController::class, 'indexActivity']);
     Route::get('/generate-pdf-activity/{reference}/{status}/{date_from}/{date_to}', [PDFController::class, 'indexActivity']);
     
 
@@ -84,13 +85,13 @@ Route::middleware('auth')->group(function(){
     Route::post('/supervisor/activity-tracker/update/{id}/{status}', [ActivityTrackerController::class, 'update']);
 
     // SCORECARD
-    Route::get('/supervisor/scorecard', [ScorecardController::class, 'index']);
+    Route::get('/supervisor/scorecard', [ScorecardController::class, 'supervisor_index']);
 
     // PRODUCTIVITY REPORT
     Route::get('/supervisor/productivity-report', [ProductivityReportController::class, 'index']);
     
-    // SCHEDULING MANAGEMENT
-    Route::get('/supervisor/reports-management', [ReportsManagementController::class, 'index']);
+    // GENERATE REPORT
+    Route::get('/supervisor/generate-report', [SupervisorGenerateReportController::class, 'index']);
   });
 });
 

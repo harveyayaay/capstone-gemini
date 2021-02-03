@@ -9,6 +9,7 @@
         <button>Add Task</button>
       </a>
     </div>
+    <p>Productive Tasks</p>
     <table class="table table-sm text-center">
       <thead class="bg-secondary text-white">
         <tr>
@@ -20,13 +21,41 @@
         </tr>
       </thead>
       <tbody>
-        @forelse($task_list_table as $key)
-          @if($key->status == 'Active')
+        @forelse($prod as $key)
+          @if($key->status == 'Active' && $key->type == 'Productive')
           <tr>
             <td>{{$key->title}}</td>
             <td>{{$key->process_time}}</td>
             <td>{{$key->sla}}</td>
             <td>{{$key->level}}</td>
+            <td>
+              <a class="m-1" href="/admin/tracker-management/edit/{{$key->id}}">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </a>
+            </td>
+          </tr> 
+          @endif
+        @empty
+          <tr>
+            <td colspan="9" class="p-4">No record found</td>
+          </tr>
+        @endforelse
+      </tbody>
+    </table>
+
+    <p>Non-productive Tasks</p>
+    <table class="table table-sm text-center">
+      <thead class="bg-secondary text-white">
+        <tr>
+          <td>Task</td>
+          <td>Actions</td>
+        </tr>
+      </thead>
+      <tbody>
+        @forelse($non_prod as $key)
+          @if($key->status == 'Active' && $key->type == 'Non-productive')
+          <tr>
+            <td>{{$key->title}}</td>
             <td>
               <a class="m-1" href="/admin/tracker-management/edit/{{$key->id}}">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

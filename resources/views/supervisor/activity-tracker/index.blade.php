@@ -39,7 +39,7 @@
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
               </form>
-              <form action="/supervisor/activity-tracker/update/{{$data->id}}/End" method="post">
+              <form action="/supervisor/activity-tracker/update/{{$data->id}}/Completed" method="post">
                 @csrf
                 <button type="submit" class="btn-link text-success m-1 h-1">
                   <i class="fa fa-check" aria-hidden="true"></i>
@@ -123,7 +123,6 @@
     </div>
   @endif
   <!-- endif for on-hold -->
-
   @if($countComplete > 0)
     <div class="card mt-4">
       <div class="card-body"> 

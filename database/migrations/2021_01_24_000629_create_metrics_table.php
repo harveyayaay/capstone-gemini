@@ -14,12 +14,13 @@ class CreateMetricsTable extends Migration
     public function up()
     {
         Schema::create('metrics', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('title')->unique();
             $table->string('type');
             $table->string('goal');
             $table->string('status');
             $table->string('reference');
+            $table->string('total_hash');
             $table->timestamps();
         });
     }

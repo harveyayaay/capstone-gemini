@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Supervisor\Task;
 use DB;
 
+ConvertingTime::index()
+
 class ActivityTrackerController extends Controller
 { 
   public function index()
@@ -30,8 +32,7 @@ class ActivityTrackerController extends Controller
       ->where('status','=','Ongoing')
       ->where('empid','<=',Auth::id())
       ->count();
-    // dd($data['countOngoing']);
-      // dd($data['count']);
+
     if($data['countOngoing'] > 0)
     {
       $data['tasks'] = DB::table('tasks')
@@ -43,7 +44,6 @@ class ActivityTrackerController extends Controller
     }
     else
     {
-
       $data['countHold'] = DB::table('tasks')
       ->where('status','=','Hold')
       ->where('current_date','>=',$date_from)
@@ -95,7 +95,7 @@ class ActivityTrackerController extends Controller
   {
     // store
 
-    if($status == 'Hold' || $status == 'End' || $status == 'Incomplete')
+    if($status == 'Hold' || $status == 'Completed' || $status == 'Incomplete')
     {
       $data = Task::find($id);
       $data->time_end = date('Y-m-d H:i:s');

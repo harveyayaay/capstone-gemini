@@ -16,9 +16,10 @@ class CreateTaskListsTable extends Migration
         Schema::create('task_lists', function (Blueprint $table) {
           $table->bigIncrements('id');
           $table->string('title');
-          $table->time('process_time');
-          $table->time('sla');
-          $table->string('level');
+          $table->time('process_time')->nullable();
+          $table->time('sla')->nullable();
+          $table->string('level')->nullable();
+          $table->string('type');
           $table->string('status');
           $table->timestamps();
         });
