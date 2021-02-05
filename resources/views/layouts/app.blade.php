@@ -67,15 +67,8 @@
     </nav>
             
     <div class="p-5">
-    
 
-
-
-
-
-
-
-
+  <h3 class="text-blue-800">@yield('title')</h3>
 
       <!-- Toggle button -->
       <!-- <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars"></i><small class="text-uppercase font-weight-bold"></small></button> -->

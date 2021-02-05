@@ -8,7 +8,7 @@
         <!-- <input type="submit" class="form-control-sm col-1 btn-primary">  -->
       </div>
       <table class="table table-sm text-center">
-        <thead class="bg-secondary text-white">
+        <thead class="bg-blue-900 text-white">
           <tr>
             <td>Date</td>
             <td>Type of Activity</td>

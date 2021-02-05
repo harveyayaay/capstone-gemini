@@ -1,18 +1,25 @@
 @extends('layouts.app')
 @section('content')
+@section('title', 'Employee Management')
+@section('caption', '(Caption..)')
 
-<h4 class="text-white">Edit Employee</h4>
-<p class="text-white mb-3">(Caption..)</p>
+
 <!-- IMAGE UPLOAD  -->
-<div class="d-flex justify-content-center mb-3">
-  <div class="card col-lg-2">
-    <div class="card-body">
-      <div class="d-flex justify-content-center px-5">
-        @livewire('file-upload', ["userid" => $data->id])
+
+<div class="d-flex justify-content-center">
+  <div class="">
+    <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Edit Employee</h6></div>
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-center px-5">
+            @livewire('file-upload', ["userid" => $data->id])
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+<div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Edit Employee</h6></div>
 <div class="card">
   <div class="card-body">
     @livewire('deactivate-account', ["userid" => $data->id])
@@ -60,9 +67,9 @@
             </select>
           </div> -->
         </div>
-        <div class="pt-8 flex-fill row col-lg-12">
-            <input type="submit" value="Save" class="btn btn-primary col-lg-2 ml-auto">
-        </div>
+      </div>
+      <div class="d-flex justify-content-end text-center m-3">
+        <button type="submit" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Save</button>
       </div>
       
     </form>

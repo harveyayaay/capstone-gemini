@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<h4 class="text-white">Edit Tracker</h4>
-<p class="text-white mb-3">(Caption..)</p>
+@section('title', 'Tracker Management')
+@section('caption', '(Caption..)')
+<div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Edit Tracker</h6></div>
 <div class="card">
   <div class="card-body">
     <form action="/admin/tracker-management/update/{{$task_list_table->id}}" method="POST">
@@ -45,7 +46,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-end text-center">
-        <input type="submit" value="Update" class="form-control-sm col-1 btn-primary mb-2">
+        <input type="submit" value="Update" class="form-control-sm col-1 mt-2 bg-blue-900 text-white mb-2">
       </div>
     </form>
   </div>

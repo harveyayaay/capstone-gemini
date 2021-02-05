@@ -2,11 +2,11 @@
 @section('title', 'Employee Management')
 @section('caption', '(Caption..)')
 @section('content')
-<div class="card">
+<div class="card mt-5">
   <div class="card-body">
     <div class="card-body">
-      <div class="offset-10 col-2 text-right pb-3">
-        <a type='button' class="btn btn-block btn-primary" href="/admin/employee-management/add">Add Employee</a>
+      <div class="d-flex justify-content-end text-center m-3">
+        <a  href="/admin/employee-management/add" class="form-control-sm col-lg-2 col-md-2 bg-blue-900 text-white mb-2">Add Employee</a>
       </div>
       <div class="row 5-10 pr-3 pl-3">
         <table class="table table-sm ">

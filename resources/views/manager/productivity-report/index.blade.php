@@ -2,19 +2,19 @@
 @section('title', 'Productivity Report')
 @section('caption', '(Caption..)')
 @section('content')
-<div class="card">
+<div class="card mt-5">
   <div class="card-body">
     <div class="card-body">
       <div class="pb-3 row justify-content-end">
           <div class="row">
             <div class="col-4 m-1">
-              <input type="date" class="" value="{{date('Y-m-d',strtotime('-5 days',strtotime(date('Y-m-d'))))}}" max="{{date('Y-m-d')}}">
+              <input type="date" class="form-control-sm" value="{{date('Y-m-d',strtotime('-5 days',strtotime(date('Y-m-d'))))}}" max="{{date('Y-m-d')}}">
             </div>
             <div class="col-4 m-1">
-              <input type="date" class="" value="{{date('Y-m-d')}}">
+              <input type="date" class="form-control-sm" value="{{date('Y-m-d')}}">
             </div>
-            <div class="col-3 m-1">
-              <button class="btn btn-block btn-primary pb-2">Generate</button>
+            <div class="btn col-3 m-1">
+              <button class="form-control-sm bg-blue-900 text-white">Generate</button>
             </div>
           </div>
         </div>

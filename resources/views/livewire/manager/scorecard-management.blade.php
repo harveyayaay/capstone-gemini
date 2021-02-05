@@ -1,6 +1,7 @@
-
+<div>
   <div class="row">
     <div class="col-lg-8 col-sm-12 col-md-12">
+    <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Add Metric</h6></div>
       <div class="card">
         <div class="card-body">
 
@@ -34,12 +35,13 @@
       </div>
     </div>
     <div class="col-lg-4 col-sm-12 col-md-12">
+    <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Performance Ranges</h6></div>
       <div class="card">
         <div class="card-body">
-          <div class="flex-fill row col-lg-12">
+          <div class="flex-fill">
             <table class="table">
               <tr class="bg-secondary text-white">
-                <td>Performance Ranges</td>
+                <td>Ranges</td>
                 <td>From</td>
                 <td>To</td>
               </tr>
@@ -73,12 +75,14 @@
         </div>
       </div>
     </div>
-  <div class="d-flex justify-content-end text-center mt-3">
+  </div>
+  <div class="d-flex justify-content-end text-center m-3">
     @if($perf_ranges == 'true' && $title != null && $goal != null)
-      <button wire:click="save" type="button" class="form-control-sm col-2 btn-primary m-0">Add Metric</button>
+      <button wire:click="save" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Add Metric</button>
     @else
-      <input type="button" class="form-control-sm col-2 btn-secondary m-0" value="Add Metric" disabled>
+      <input type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" value="Add Metric" disabled>
     @endif
-  </div>
-  </div>
+  </div>  
+</div>
+
 

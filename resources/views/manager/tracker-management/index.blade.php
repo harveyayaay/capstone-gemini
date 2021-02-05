@@ -2,15 +2,15 @@
 @section('title', 'Tracker Management')
 @section('caption', '(Caption..)')
 @section('content')
+
 <div class="">
-  <!-- <div class="p-2 bg-blue-900 text-white">Tracker Management</div> -->
+  <div class="d-flex justify-content-end text-center m-3">
+    <a href="/admin/tracker-management/add" class="form-control-sm col-lg-2 col-md-2 bg-blue-900 text-white mb-2">
+      <button>Add Task</button>
+    </a>
+  </div>
+  <div class="pt-2 pl-2 pb-1 bg-blue-900 text-white"><h6>Productive Tasks</h6></div>
   <div class="card-body shadow p-3 mb-5 bg-white rounded">
-    <div class="d-flex justify-content-end text-center">
-      <a href="/admin/tracker-management/add" class="form-control-sm col-1 bg-blue-900 text-white mb-2">
-        <button>Add Task</button>
-      </a>
-    </div>
-    <h6>Productive Tasks</h6>
     <table class="table table-sm text-center table-hover ">
       <thead class="text-blue-800">
         <tr>
@@ -44,9 +44,9 @@
       </tbody>
     </table>
   </div>
+  <div class="pt-2 pl-2 pb-1 bg-blue-900 text-white"><h6>Non-Productive Tasks</h6></div>
   <div class="card-body shadow p-3 mb-5 bg-white rounded">
 
-    <h6>Non-productive Tasks</h6>
     <table class="table table-sm text-center">
       <thead class="">
         <tr>
