@@ -70,6 +70,9 @@
             
     <div class="p-5">
 
+  <h3 class="text-blue-800">@yield('title')</h3>
+
+
 
 
     

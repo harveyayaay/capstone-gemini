@@ -5,7 +5,7 @@
 
 
 
-<div class="card">
+<div class="card mt-5">
   <div class="card-body">
     <div class="container">
       <!-- <div class="offset-6 text-right pb-3">
@@ -82,7 +82,7 @@
         <!-- Metrics Tab  -->
         <div id="metrics" class="tab-pane fade"><br>
           <div class="d-flex justify-content-end text-center">
-            <a href="/admin/scorecard-management/add" class="form-control-sm col-1 btn-primary mb-2">
+            <a href="/admin/scorecard-management/add" class="form-control-sm col-1 bg-blue-900 text-white mb-2">
               <button>Add Metric</button>
             </a>
           </div>

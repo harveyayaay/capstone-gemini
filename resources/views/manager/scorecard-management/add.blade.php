@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<h4 class="text-white">Add Metric</h4>
-<p class="text-white mb-3">(Caption..)</p>
+@section('title', 'Scorecard Management')
+@section('caption', '(Caption..)')
+
 <form action="#" method="POST">
   @csrf 
   @livewire('manager.scorecard-management')

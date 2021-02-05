@@ -36,7 +36,7 @@
         </div>
         <input type="text" name="field_type" id="field_type" value="Productive" hidden>
         <div class="d-flex justify-content-end text-center">
-          <input type="submit" value="Save" class="form-control-sm col-1 btn-primary mb-2">
+          <input type="submit" value="Save" class="form-control-sm col-1 mt-4 text-white bg-blue-900 mb-2">
         </div>
     @else
         <div class="form-group-sm row">
