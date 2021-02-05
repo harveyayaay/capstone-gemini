@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Supervisor\Task;
 use DB;
 
-ConvertingTime::index()
-
 class ActivityTrackerController extends Controller
 { 
   public function index()

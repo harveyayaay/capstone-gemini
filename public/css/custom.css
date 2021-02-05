@@ -1,3 +1,10 @@
+/* body {
+  background: #599fd9;
+  background-image: linear-gradient( 135.9deg,  rgb(24, 88, 224) 16.4%, rgb(44, 44, 44) 56.1% );
+  min-height: 100vh;
+  overflow-x: hidden;
+} */
+
 /* IMG */
 .imgsize-sm{
   height: 40px;

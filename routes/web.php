@@ -15,6 +15,8 @@ use App\Http\Controllers\Manager\ProductivityReportController;
 use App\Http\Controllers\Supervisor\SupervisorDashboardController;
 use App\Http\Controllers\Supervisor\ActivityTrackerController;
 use App\Http\Controllers\Supervisor\SupervisorGenerateReportController;
+
+use App\Http\Controllers\LogoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,6 +96,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/supervisor/generate-report', [SupervisorGenerateReportController::class, 'index']);
   });
 });
+
+Route::get('/logout', [LogoutController::class, 'logout']);
+
 
 // TRACKER MANAGEMENT
   // Route::get('/tracker-management',[
