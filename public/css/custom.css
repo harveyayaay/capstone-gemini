@@ -101,3 +101,7 @@ img {
 .fadeIn-bottom {
   top: 80%
 }
+
+.dropdown-toggle{
+  display: none;
+}

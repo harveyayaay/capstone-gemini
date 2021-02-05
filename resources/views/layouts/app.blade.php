@@ -45,19 +45,17 @@
 
   <div class="page-content" id="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow">
-
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <div class="dropdown">
-              <a class="dropdown-toggle" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-bell p-2 mr-2" aria-hidden="true"></i>
-                
               </a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                <div class="p-2" role="button">
+                    Notification 1
+                </div>
               </div>
             </div>
           </li>
@@ -71,19 +69,6 @@
     <div class="p-5">
 
   <h3 class="text-blue-800">@yield('title')</h3>
-
-
-
-
-    
-
-
-
-
-
-
-
-
 
       <!-- Toggle button -->
       <!-- <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars"></i><small class="text-uppercase font-weight-bold"></small></button> -->
@@ -117,6 +102,20 @@
 </html>
 
 @section('custom_js')
+
+
+<script>
+function myFunction()
+{
+     alert("Hello"); 
+}
+setInterval(myFunction, 1000);
+
+</script>
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
   (function(){
@@ -144,6 +143,8 @@
       }
     })
   })();
+
+  
   
   // To set mindate in enddate
   function customRange(input) 
