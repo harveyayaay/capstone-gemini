@@ -12,11 +12,16 @@ class TrackerManagementController extends Controller
     {
     //   $data['task_list_table'] = TrackerManagement::where('status', '=', 'Active')->get();
       // return view("admin.settings.about-us.index", $data);
-      $data['task_list_table'] = DB::select(
-        "SELECT * 
-          FROM task_lists
-          WHERE status = 'Active'
-        ");
+      $data['prod'] = DB::table('task_lists')
+          ->where('status','Active')
+          ->where('type','Productive')
+          ->get();
+        
+      $data['non_prod'] = DB::table('task_lists')
+          ->where('status','Active')
+          ->where('type','Non-productive')
+          ->get();
+
       // return view("manager.tracker-management.index", $data);
       // $task_list_table = TrackerManagement::get();
        return view("manager.tracker-management.index", $data);
@@ -35,6 +40,7 @@ class TrackerManagementController extends Controller
           'process_time' => $request->field_process_time,
           'sla' => $request->field_sla,
           'level' => $request->field_level,
+          'type' => $request->field_type,
           'status' => 'Active'
         ];
       $store = DB::table('task_lists')->insert($store_data);

@@ -192143,12 +192143,6 @@ select {
   }
 }
 
-body {
-  background: #599fd9;
-  background-image: linear-gradient( 135.9deg,  rgba(109,25,252,1) 16.4%, rgba(125,31,165,1) 56.1% );
-  min-height: 100vh;
-  overflow-x: hidden;
-}
  .vertical-nav {
   min-width: 17rem;
   width: 17rem;
@@ -192189,7 +192183,7 @@ body {
     text-transform: capitalize;
 }
 .nav-link:hover{
-    background:#f3f2f2;
+  background:#2563EB;
 }
 .text-primary{
     color:#7579e7 !important;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class GenerateReportController extends Controller
+class ManagerGenerateReportController extends Controller
 {
   public function index()
   {

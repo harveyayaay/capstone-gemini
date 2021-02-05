@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Schedule;
-use Maatwebsite\Excel\Concerns\ToModel;
 
 class ScheduleImport implements ToModel
 {
