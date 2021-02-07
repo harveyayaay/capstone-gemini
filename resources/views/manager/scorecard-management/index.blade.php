@@ -3,8 +3,6 @@
 @section('caption', '(Caption..)')
 @section('content')
 
-
-
 <div class="card mt-5">
   <div class="card-body">
     <!-- Nav tabs -->
@@ -21,47 +19,36 @@
     <div class="tab-content">
       <div id="scorecard" class="tab-pane active"><br>
       <!-- Accordion Start -->
+      @foreach($user_scorecard as $value)
         <div class="accordion" id="accordionExample">
           <div class="card">
-            <div class="card-header" id="headingOne">
-                <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  Collapsible Group Itedm #1
+            <div class="card-header" id="heading{{$loop->iteration}}">
+                <button class="btn-link" type="button" data-toggle="collapse" data-target="#collapse{{$loop->iteration}}" aria-expanded="true" aria-controls="collapse{{$loop->iteration}}">
+                  {{$value['name']}}
                 </button>
             </div>
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div id="collapse{{$loop->iteration}}" class="collapse" aria-labelledby="heading{{$loop->iteration}}" data-parent="#accordionExample">
               <div class="card-body">
                 <table class="table table-hover table-sm">
                   <thead class="text-blue-800">
                     <tr>
                       <th>Metric</th>
                       <th>Actual</th>
-                      <th>Goal</th>
+                      <th>Goal</th> 
                       <th>Performance Percentage</th>
                       <th>Score</th>
                     </tr>
                   </thead>
                   <tbody class="text-gray-500">
+                  @foreach($value['scorecard'] as $val)
                     <tr>
-                      <td>Average Processing Time (Application)</td>
-                      <td></td>
-                      <td></td>
+                      <td>{{$val['titles']}}</td>
+                      <td>{{$val['actuals']}}</td>
+                      <td>{{$val['goals']}}</td>
                       <td></td>
                       <td></td>
                     </tr>
-                    <tr>
-                      <td>Average Processing Time (AMIE)</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Volume</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
+                  @endforeach
                     <tr>
                       <td>Quality Assurance</td>
                       <td></td>
@@ -89,6 +76,7 @@
             </div>
           </div>
         </div>
+      @endforeach
       <!-- /Accordion Start -->
       </div>
     <!-- /Scorecard Tab -->
@@ -118,7 +106,6 @@
                     
                     <p>Metric Type: {{$key['metric_record']->type}}</p>
                     <p>Metric Goal: {{$key['metric_record']->goal}}</p>
-                    <p>Reference: {{$key['metric_record']->reference}}</p>
                   </div>
                 </div>
               </div>
