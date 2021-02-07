@@ -16,7 +16,10 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('current_date');
-            $table->string('type');
+            $table->integer('task_lists_id')->unsigned(); // task list id
+            $table->foreign('task_lists_id')
+            ->references('id')
+            ->on('task_lists');
             $table->string('case_num');
             $table->date('date_received');
             $table->dateTime('time_start');
@@ -25,8 +28,7 @@ class CreateTasksTable extends Migration
             $table->string('process_duration')->nullable();
             $table->string('hold_duration')->nullable();
             $table->string('status');
-            // employee id
-            $table->integer('empid')->unsigned();
+            $table->integer('empid')->unsigned(); // employee id
             $table->foreign('empid')
             ->references('id')
             ->on('users')

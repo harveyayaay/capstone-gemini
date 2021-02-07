@@ -22,6 +22,7 @@ class PerformanceRanges extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
           $table->float('range');
+          $table->float('percentage');
           $table->string('from');
           $table->string('to');
           $table->timestamps();
