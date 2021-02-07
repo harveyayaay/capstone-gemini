@@ -4,7 +4,7 @@
 @section('content')
 <div class="card">
   <div class="card-body"> 
-    Dashboard
+    @livewire('manager.dashboard')
   </div>
 </div>
 @endsection

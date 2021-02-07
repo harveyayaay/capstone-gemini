@@ -21,7 +21,7 @@
         <tbody>
         @foreach($tasks as $data)
           <tr>
-            <td class="pt-2">{{$data->type}}</td>
+            <td class="pt-2">{{$data->title}}</td>
             <td class="pt-2">{{$data->case_num}}</td>
             <td class="pt-2">{{$data->date_received}}</td>
             <td class="pt-2">{{date('H:i:s',strtotime($data->time_start))}}</td>
@@ -63,8 +63,9 @@
           <div class="form-row">
             <div class="col-4">
               <select id="" class="form-control form-control-sm" name="type">
-                <option>Application</option>
-                <option>Urgent</option>
+                @foreach($tasks_list as $task)
+                  <option value="{{$task->id}}">{{$task->title}}</option>
+                @endforeach
               </select>
             </div>
             <div class="col-3">
@@ -103,7 +104,7 @@
             <form action="/supervisor/activity-tracker/update/{{$data->id}}/Continue" method="post">
               @csrf
             <tr>
-              <td class="pt-2">{{$data->status}}</td>
+              <td class="pt-2">{{$data->title}}</td>
               <td class="pt-2">{{$data->case_num}}</td>
               <td class="pt-2">{{$data->date_received}}</td>
               <td class="pt-2">{{date('H:i:s',strtotime($data->time_start))}}</td>
@@ -143,7 +144,7 @@
           @forelse($tasks as $data)
             @if($data->status == 'Completed')
             <tr>
-              <td>{{$data->status}}</td>
+              <td>{{$data->title}}</td>
               <td>{{$data->case_num}}</td>
               <td>{{$data->date_received}}</td>
               <td>{{date('H:i:s',strtotime($data->time_start))}}</td>

@@ -25,7 +25,7 @@
         @forelse($data as $value)
           <tr>
             <td>{{date('Y-m-d', strtotime($value->current_date))}}</td>
-            <td>{{$value->type}}</td>
+            <td>{{$value->title}}</td>
             <td>{{$value->case_num}}</td>
             <td>{{$value->date_received}}</td>
             <td>{{$value->time_start}}</td>

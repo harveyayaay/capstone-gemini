@@ -34,10 +34,12 @@ class ActivityTrackerController extends Controller
     if($data['countOngoing'] > 0)
     {
       $data['tasks'] = DB::table('tasks')
-        ->where('status','=','Ongoing')
-        ->where('current_date','>=',$date_from)
-        ->where('current_date','<=',$date_to)
-        ->where('empid','<=',Auth::id())
+        ->join('task_lists', 'tasks.task_lists_id','=','task_lists.id')
+        ->select('tasks.*', 'task_lists.title')
+        ->where('tasks.status','=','Ongoing')
+        ->where('tasks.current_date','>=',$date_from)
+        ->where('tasks.current_date','<=',$date_to)
+        ->where('tasks.empid','<=',Auth::id())
         ->get();
     }
     else
@@ -57,11 +59,18 @@ class ActivityTrackerController extends Controller
       ->count();
 
       $data['tasks'] = DB::table('tasks')
-      ->where('current_date','>=',$date_from)
-      ->where('current_date','<=',$date_to)
-      ->where('empid','<=',Auth::id())
+      ->join('task_lists', 'tasks.task_lists_id','=','task_lists.id')
+      ->select('tasks.*', 'task_lists.title')
+      ->where('tasks.current_date','>=',$date_from)
+      ->where('tasks.current_date','<=',$date_to)
+      ->where('tasks.empid','<=',Auth::id())
       ->get();
     }
+
+    $data['tasks_list'] = DB::table('task_lists')
+      ->where('status','Active')
+      ->get();
+      
     return view("supervisor.activity-tracker.index", $data);
   }
 
@@ -69,7 +78,7 @@ class ActivityTrackerController extends Controller
   {
      $store_data = [
           'current_date' => date('Y-m-d H:i:s'),
-          'type' => $request->type,
+          'task_lists_id' => $request->type,
           'case_num' => $request->case_num,
           'date_received' => $request->date_received,
           'time_start' => date('Y-m-d H:i:s'),
