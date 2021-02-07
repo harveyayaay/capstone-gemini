@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskListsTable extends Migration
+class Notifications extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateTaskListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_lists', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('title');
-          $table->time('process_time')->nullable();
-          $table->time('sla')->nullable();
-          $table->string('level')->nullable();
-          $table->string('type');
+      Schema::create('notifications', function (Blueprint $table) {
+          $table->integer('id');
+          $table->integer('empid')->unsigned();
+          $table->foreign('empid')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+          $table->longText('message');
           $table->string('status');
           $table->timestamps();
-        });
+      });
     }
 
     /**
@@ -32,6 +34,6 @@ class CreateTaskListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_lists');
+        //
     }
 }

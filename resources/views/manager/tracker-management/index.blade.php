@@ -11,7 +11,7 @@
   </div>
   <div class="pt-2 pl-2 pb-1 bg-blue-900 text-white"><h6>Productive Tasks</h6></div>
   <div class="card-body shadow p-3 mb-5 bg-white rounded">
-    <table class="table table-sm text-center table-hover ">
+    <table class="table table-sm text-center table-hover">
       <thead class="text-blue-800">
         <tr>
           <td>Task</td>
