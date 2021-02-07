@@ -26,6 +26,8 @@ class GenerateActivities extends Component
             // gets data 
               $this->data = DB::table('tasks')
               ->join('users', 'tasks.empid', '=', 'users.id')
+              ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+              ->select('tasks.*', 'users.firstname', 'users.lastname', 'task_lists.title')
               ->where('tasks.status','=',$this->status)
               ->where('tasks.current_date','>=',$this->date_from)
               ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
@@ -104,7 +106,9 @@ class GenerateActivities extends Component
         {
           $this->data = DB::table('tasks')
             ->join('users', 'tasks.empid', '=', 'users.id')
-            ->where('tasks.type','=',$this->reference)
+            ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+            ->select('tasks.*', 'users.firstname', 'users.lastname', 'task_lists.title')
+            ->where('task_lists.title','=',$this->reference)
             ->where('tasks.status','=',$this->status)
             ->where('tasks.current_date','>=',$this->date_from)
             ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
@@ -137,12 +141,14 @@ class GenerateActivities extends Component
         {
             $this->data = DB::table('tasks')
               ->join('users', 'tasks.empid', '=', 'users.id')
+              ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+              ->select('tasks.*', 'users.firstname', 'users.lastname', 'task_lists.title')
               ->where(function($query){
                   $query
                     ->where('users.firstname','LIKE', "%" . $this->search . "%")
                     ->orWhere('users.lastname','LIKE', "%" . $this->search . "%");
               })
-              ->where('tasks.type','=',$this->reference)
+              ->where('task_lists.title','=',$this->reference)
               ->where('tasks.status','=',$this->status)
               ->where('tasks.current_date','>=',$this->date_from)
               ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))

@@ -10,7 +10,6 @@ use App\Http\Controllers\PDFController;
 
 use App\Http\Controllers\Manager\ProductivityReportController;
 
-// use App\Http\Controllers\Manager\ScorecardController;
 
 use App\Http\Controllers\Supervisor\SupervisorDashboardController;
 use App\Http\Controllers\Supervisor\ActivityTrackerController;
@@ -36,7 +35,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){
     // DASHBOARD
-    Route::get('/dashboard', [ManagerDashboardController::class, 'index']);
+    Route::get('/admin/dashboard', [ManagerDashboardController::class, 'index']);
 
     // TRACKER MANAGEMENT
     Route::get('/admin/tracker-management', [TrackerManagementController::class, 'index']);
@@ -62,10 +61,6 @@ Route::middleware('auth')->group(function(){
     
     // PDF
     Route::get('/generate-pdf-activity/{reference}/{status}/{date_from}/{date_to}', [PDFController::class, 'indexActivity']);
-    
-
-    // SCORECARD
-    Route::get('/admin/scorecard', [ScorecardController::class, 'index']);
 
     // PRODUCTIVITY REPORT
     Route::get('/admin/productivity-report', [ProductivityReportController::class, 'index']);
@@ -85,9 +80,6 @@ Route::middleware('auth')->group(function(){
     Route::get('/supervisor/activity-tracker/add-task', [ActivityTrackerController::class, 'add']);
     Route::post('/supervisor/activity-tracker/store/', [ActivityTrackerController::class, 'store']);
     Route::post('/supervisor/activity-tracker/update/{id}/{status}', [ActivityTrackerController::class, 'update']);
-
-    // SCORECARD
-    Route::get('/supervisor/scorecard', [ScorecardController::class, 'supervisor_index']);
 
     // PRODUCTIVITY REPORT
     Route::get('/supervisor/productivity-report', [ProductivityReportController::class, 'index']);

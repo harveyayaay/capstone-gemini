@@ -7,7 +7,7 @@
 <div class="vertical-nav bg-blue-900 text-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-blue-900 shadow shadow-r">
     <div class="media d-flex align-items-center">
-      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+      <img loading="lazy" src="" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
         <h4 class="m-0">Olivia</h4>
         <p class="font-weight-normal text-white mb-0">Web developer</p>
@@ -19,7 +19,7 @@
 
   <ul class="nav flex-column bg-blue-900 mb-0">
     <li class="nav-item">
-      <a href="#" class="nav-link text-white p-0">
+      <a href="/admin/dashboard" class="nav-link text-white p-0">
         <i class="fa fa-address-card mr-3 text-white fa-fw ml-3"></i>
           <label class="col-form-label-sm">Dashboard</label>
       </a>
