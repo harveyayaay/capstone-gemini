@@ -25,6 +25,11 @@ class Users
     {
       return $next($request);
     }
-      return abort(403, 'Unauthorized');
+    else if(Auth::user()->position === "Frontliner")
+    {
+      return $next($request);
+    }
+      // return abort(403, 'Unauthorized');
+      dd(Auth::user()->position);
   }
 }

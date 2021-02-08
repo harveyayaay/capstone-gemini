@@ -1,5 +1,8 @@
+<div>
+    {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+</div>
  
-  <div class="card col mb-2">
+<div class="card col mb-2">
     <div class="card-body"> 
       Overall MTD Volume
       <canvas id="MTDTaskVolume" width="400" height="70"></canvas>

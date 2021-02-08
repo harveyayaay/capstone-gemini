@@ -28,7 +28,7 @@ class ActivityTrackerController extends Controller
 
     $data['countOngoing'] = DB::table('tasks')
       ->where('status','=','Ongoing')
-      ->where('empid','<=',Auth::id())
+      ->where('empid','=',Auth::id())
       ->count();
 
     if($data['countOngoing'] > 0)
@@ -39,7 +39,7 @@ class ActivityTrackerController extends Controller
         ->where('tasks.status','=','Ongoing')
         ->where('tasks.current_date','>=',$date_from)
         ->where('tasks.current_date','<=',$date_to)
-        ->where('tasks.empid','<=',Auth::id())
+        ->where('tasks.empid','=',Auth::id())
         ->get();
     }
     else
@@ -48,14 +48,14 @@ class ActivityTrackerController extends Controller
       ->where('status','=','Hold')
       ->where('current_date','>=',$date_from)
       ->where('current_date','<=',$date_to)
-      ->where('empid','<=',Auth::id())
+      ->where('empid','=',Auth::id())
       ->count();
 
       $data['countComplete'] = DB::table('tasks')
       ->where('status','=','Completed')
       ->where('current_date','>=',$date_from)
       ->where('current_date','<=',$date_to)
-      ->where('empid','<=',Auth::id())
+      ->where('empid','=',Auth::id())
       ->count();
 
       $data['tasks'] = DB::table('tasks')
@@ -63,7 +63,7 @@ class ActivityTrackerController extends Controller
       ->select('tasks.*', 'task_lists.title')
       ->where('tasks.current_date','>=',$date_from)
       ->where('tasks.current_date','<=',$date_to)
-      ->where('tasks.empid','<=',Auth::id())
+      ->where('tasks.empid','=',Auth::id())
       ->get();
     }
 

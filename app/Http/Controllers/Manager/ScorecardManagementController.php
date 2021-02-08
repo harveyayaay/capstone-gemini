@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class ScorecardManagementController extends Controller
@@ -94,6 +95,7 @@ class ScorecardManagementController extends Controller
       ));
       
       array_push($user_scorecard,array(
+        "id" => $user->id,
         "name" => $user->firstname.' '.$user->lastname,
         "scorecard" => $scorecard_details,
       ));
@@ -117,7 +119,15 @@ class ScorecardManagementController extends Controller
         "perf_record" => $data2,
       ));
     }
-    return view("manager.scorecard-management.index",compact('records','user_scorecard'));
+
+    // dd($user_scorecard);
+    if(Auth::user()->position == "Manager")
+      return view("manager.scorecard-management.index",compact('records','user_scorecard'));
+    elseif(Auth::user()->position == "Supervisor")
+      return view("supervisor.scorecard-management.index",compact('records','user_scorecard'));
+    else
+      return view("frontliner.scorecard-management.index",compact('records','user_scorecard'));
+
   }
   public function add()
   {

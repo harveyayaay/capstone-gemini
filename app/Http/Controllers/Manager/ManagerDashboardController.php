@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class ManagerDashboardController extends Controller
 {
@@ -17,9 +18,6 @@ class ManagerDashboardController extends Controller
 
     $data = DB::table('sessions')
     ->get();
-    
-    // dd($data);
-
-     return view("manager.dashboard.index");
+      return view("manager.dashboard.index");
   }
 }

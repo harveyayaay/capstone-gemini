@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
       DB::table('users')->insert([
-        'firstname' => 'Admin Firstname',
-        'lastname' => 'Admin Lastname',
+        'firstname' => 'Lino',
+        'lastname' => 'Semira',
         'username' => 'admin',
         'email' => 'admin@email.example.com',
         'contact' => '00000000000',

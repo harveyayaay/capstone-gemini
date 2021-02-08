@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Manager;
+namespace App\Http\Livewire\Frontliner;
 
 use Livewire\Component;
 use DB;
@@ -106,6 +106,6 @@ class Dashboard extends Component
       $data['user_count_vol3'][] = 3;
       $data['user_count_vol3'][] = 1;
 
-      return view('livewire.manager.dashboard', $data);
+      return view('livewire.frontliner.dashboard', $data);
     }
 }

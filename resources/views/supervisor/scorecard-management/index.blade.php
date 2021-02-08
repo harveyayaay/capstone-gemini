@@ -29,6 +29,12 @@
             </div>
             <div id="collapse{{$loop->iteration}}" class="collapse" aria-labelledby="heading{{$loop->iteration}}" data-parent="#accordionExample">
               <div class="card-body">
+              <div class="d-flex justify-content-end text-center">
+                <a href="/admin/scorecard-management/add" class="form-control-sm col-1 bg-blue-900 text-white mb-2">
+                <!-- <a href="/admin/scorecard-management/add" class="form-control-sm col-1 bg-secondary text-white mb-2"> -->
+                  <button>Save Changes</button>
+                </a>
+              </div>
                 <table class="table table-hover table-sm">
                   <thead class="text-blue-800">
                     <tr>
@@ -52,12 +58,10 @@
                     <tr>
                       <td>Quality Assurance</td>
                       <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="0" required> -->
-                        0
+                        <input type="text" class="form-control form-control-sm" value="0" required>
                       </td>
                       <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="100" required> -->
-                        0
+                        <input type="text" class="form-control form-control-sm" value="100" required>
                       </td>
                       <td class="text-center">0%</td>
                       <td class="text-center">0</td>
@@ -65,12 +69,10 @@
                     <tr>
                       <td>Escalation</td>
                       <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="0" required> -->
-                        0
+                        <input type="text" class="form-control form-control-sm" value="0" required>
                       </td>
                       <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="0" required> -->
-                        0
+                        <input type="text" class="form-control form-control-sm" value="0" required>
                       </td>
                       <td class="text-center">100%</td>
                       <td class="text-center">3</td>
