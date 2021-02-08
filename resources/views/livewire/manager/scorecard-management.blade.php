@@ -48,7 +48,7 @@
             <select id="reference" name="reference" wire:model="reference"  class="form-control form-control-sm">
               <option selected>All</option>
             </select>
-            
+
             <div class="d-flex justify-content-end text-center m-3">
               @if($next == true)
                 <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next</button>
@@ -61,29 +61,33 @@
               <table class="table table-sm table-borderless d-flex justify-content-center">
                 <tr>
                   <td><label for="metric" class="col-form-label-sm col">3.0</label></td>
-                  <td><input type="text" class="form-control form-control-sm col" id="metric" name="percentage1" wire:model="percentage1"  required></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage1" wire:model="percentage1"  required></td>
                 </tr>
                 <tr>
                   <td><label for="metric" class="col-form-label-sm col">2.5</label></td>
-                  <td><input type="text" class="form-control form-control-sm col" id="metric" name="percentage2" wire:model="percentage2"  required></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage2" wire:model="percentage2"  required></td>
                 </tr>
                 <tr>
                   <td><label for="metric" class="col-form-label-sm col">2.0</label></td>
-                  <td><input type="text" class="form-control form-control-sm col" id="metric" name="percentage3" wire:model="percentage3"  required></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage3" wire:model="percentage3"  required></td>
                 </tr>
                 <tr>
                   <td><label for="metric" class="col-form-label-sm col">1.5</label></td>
-                  <td><input type="text" class="form-control form-control-sm col" id="metric" name="percentage4" wire:model="percentage4"  required></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage4" wire:model="percentage4"  required></td>
                 </tr>
                 <tr>
                   <td><label for="metric" class="col-form-label-sm col">1.0</label></td>
-                  <td><input type="text" class="form-control form-control-sm col" id="metric" name="percentage5" wire:model="percentage5"  required></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage5" wire:model="percentage5"  required></td>
                 </tr>
               </table>
             </div>
             <div class="d-flex justify-content-end text-center m-3">
               <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2">Prev</button>
-              <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next</button>
+              @if($next == true)
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next</button>
+              @else
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" disabled>Next</button>
+              @endif
             </div>
               <!-- <input type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" value="Next" disabled> -->
          

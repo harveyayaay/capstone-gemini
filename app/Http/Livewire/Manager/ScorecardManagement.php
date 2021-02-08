@@ -38,6 +38,7 @@ class ScorecardManagement extends Component
     public function next()
     {
       $this->page++;
+      $this->next = false;  
     }
     public function prev()
     {
@@ -50,13 +51,25 @@ class ScorecardManagement extends Component
       $ranges = [];
       $from = [];
       $to = [];
-
-      if($this->type == 'Time')
+      if($this->page == 1)
       {
-        if(!DateTime::createFromFormat('H:i:s', $this->samplegoal) || Str::length($this->title) < 1) 
-          $this->next = false;
-        else
-          $this->next = true;
+        $this->next = false;
+        if($this->type == 'Time')
+        {
+          if(DateTime::createFromFormat('H:i:s', $this->samplegoal) && Str::length($this->title) > 0)
+            $this->next = true;
+        }
+      }
+      
+      if($this->page == 2)
+      {
+        $this->next = false;
+        if($this->percentage1 > $this->percentage2)
+          if($this->percentage2 > $this->percentage3)
+            if($this->percentage3 > $this->percentage4)
+              if($this->percentage4 >$this->percentage5)
+                if($this->percentage5 > 0)
+                  $this->next = true;
       }
 
       if($this->page == 3)
