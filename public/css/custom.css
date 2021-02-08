@@ -105,3 +105,35 @@ img {
 .dropdown-toggle{
   display: none;
 }
+
+
+.h-1{
+  height: 200px ;
+}
+.h-2{
+  height: 150px ;
+}
+.h-3{
+  height: 100px ;
+}
+.h-4{
+  height: 70px ;
+}
+.w-1{
+  width:200px;
+}
+.w-2{
+  width: 150px;
+}
+.w-3{
+  width: 100px;
+}
+.w-4{
+  width: 70px;
+}
+.m-1{
+  padding: 20px;
+}
+.m-2{
+  padding: 15px;
+}

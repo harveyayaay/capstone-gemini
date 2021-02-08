@@ -19,6 +19,7 @@ class CreateMetricsTable extends Migration
             $table->string('type');
             $table->string('goal');
             $table->string('status');
+            $table->string('reference');
             $table->string('total_hash');
             $table->timestamps();
         });

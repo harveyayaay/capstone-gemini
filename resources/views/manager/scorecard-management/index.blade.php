@@ -45,8 +45,8 @@
                       <td>{{$val['titles']}}</td>
                       <td class="text-center">{{$val['actuals']}}</td>
                       <td class="text-center">{{$val['goals']}}</td>
-                      <td class="text-center">95%</td>
-                      <td class="text-center">3</td>
+                      <td class="text-center">{{$val['percentages']}}%</td>
+                      <td class="text-center">{{number_format($val['ranges'], 1, '.', '')}}</td>
                     </tr>
                   @endforeach
                     <tr>
@@ -80,7 +80,7 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td class="text-center font-weight-bold text-blue-900">2.4</td>
+                      <td class="text-center font-weight-bold text-blue-900">{{number_format($value['overall'], 1, '.', '')}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -95,11 +95,11 @@
 
     <!-- Metrics Tab  -->
     <div id="metrics" class="tab-pane fade"><br>
-      <!-- <div class="d-flex justify-content-end text-center">
+      <div class="d-flex justify-content-end text-center">
         <a href="/admin/scorecard-management/add" class="form-control-sm col-1 bg-blue-900 text-white mb-2">
           <button>Add Metric</button>
         </a>
-      </div> -->
+      </div>
       <!-- Accordion Start -->
 
       @foreach($records as $value => $key)

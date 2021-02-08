@@ -4,7 +4,7 @@
       <select name="reports" wire:model="reports" id="" class="form-control-sm col-3">
         <option selected hidden>- Select Report to Generate-</option>
         <option value='Completed Applications'>List of Completed Applications</option>
-        <option value='Completed Activities'>List of Completed Activities</option>
+        <option value='Completed Activities'>List of Completed Activities</option>  
         <option value='Incomplete Activities'>List of Incomplete Activities</option>
         <option value='Productivity'>List of out of SLA Activities</option>
       </select>
@@ -16,9 +16,6 @@
     @elseif($reports == 'Incomplete Activities')
       @livewire('generate.generate-activities', ["status" => 'Incomplete', "reference" => 'All'])
     @else
-
-    
-
 
     @endif
 </div>

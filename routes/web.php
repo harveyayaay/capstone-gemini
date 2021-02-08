@@ -37,7 +37,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){
     // DASHBOARD
-    Route::get('/admin/dashboard', [ManagerDashboardController::class, 'index']);
+    Route::get('/dashboard', [ManagerDashboardController::class, 'index']);
 
     // TRACKER MANAGEMENT
     Route::get('/admin/tracker-management', [TrackerManagementController::class, 'index']);
@@ -99,7 +99,7 @@ Route::middleware('auth')->group(function(){
   Route::middleware('user:Frontliner')->group(function(){
 
     // DASHBOARD
-    Route::get('/frontliner/dashboard', [FrontlinerDashboardController::class, 'index']);
+    Route::get('/frontliner/dashboard', [ManagerDashboardController::class, 'index']);
 
     // ACTIVITY TRACKER
     Route::get('/frontliner/activity-tracker', [ActivityTrackerController::class, 'index']);
