@@ -40,25 +40,12 @@
       <a href="/admin/scorecard-management" class="nav-link text-white p-0">
         <i class="fa fa-picture-o mr-3 text-white fa-fw ml-3"></i>
           <label class="col-form-label-sm">Scorecard Management</label>
-        
       </a>
     </li>
     <li class="nav-item">
       <a href="/admin/generate-report" class="nav-link text-white p-0">
         <i class="fa fa-picture-o mr-3 text-white fa-fw ml-3"></i>
           <label class="col-form-label-sm">Generate Report</label>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/admin/productivity-report" class="nav-link text-white p-0">
-        <i class="fa fa-picture-o mr-3 text-white fa-fw ml-3"></i>
-          <label class="col-form-label-sm">Productivity Report</label>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="/admin/scorecard" class="nav-link text-white p-0">
-        <i class="fa fa-picture-o mr-3 text-white fa-fw ml-3"></i>
-          <label class="col-form-label-sm">Scorecard Report</label>
       </a>
     </li>
   </ul>
