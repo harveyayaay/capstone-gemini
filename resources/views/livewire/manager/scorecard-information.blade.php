@@ -12,7 +12,7 @@
           <div id="collapse{{$loop->iteration}}" class="collapse" aria-labelledby="heading{{$loop->iteration}}" data-parent="#accordionExample">
             <div class="card-body">
               <div class="d-flex justify-content-end text-center">
-                <button class="form-control-sm col-1 bg-blue-900 text-white mb-2" wire:click="saveEscQA({{ $value['id'] }})">Save Changes</button>
+                <button class="form-control-sm col-1 bg-blue-900 text-white mb-2" wire:click="saveEscQA({{ $value['id'] }})">Save Changes </button>
               </div>
               <table class="table table-hover table-sm">
                 <thead class="bg-blue-900 text-white">
