@@ -13,28 +13,29 @@ class ScorecardManagement extends Component
 {
 
     public $page;
-    public $title = 'Average App';
+    public $title;
     public $type;
     public $type_last;
-    public $samplegoal = '00:05:00';
+    public $samplegoal;
     public $goal;
+    public $references;
     public $reference;
     public $next;
 
-    public $percentage1 = '175';
-    public $percentage2 = '125';
-    public $percentage3 = '100';
-    public $percentage4 = '75';
-    public $percentage5 = '50';
+    public $percentage1;
+    public $percentage2;
+    public $percentage3;
+    public $percentage4;
+    public $percentage5;
 
     public $performance_ranges_display = array();
     
     public function mount()
     {
-      $this->page = 3;
+      $this->page = 1;
       $this->reference = 'All';
       $this->type = 'Time';
-      $this->type_last = 'Time';
+      $this->type_last = 'Volume';
       $this->next = false;
     }
     public function next()
@@ -58,6 +59,12 @@ class ScorecardManagement extends Component
 
       if($this->page == 1)
       {
+        $this->references = DB::table('task_lists')
+          ->select('title')
+          ->where('status','Active')
+          ->where('type','Productive')
+          ->get();
+
         if($this->type != $this->type_last)
         {
           $this->samplegoal = null;
@@ -197,16 +204,34 @@ class ScorecardManagement extends Component
           ->select('id')
           ->where('total_hash',$total_hash)
         ->first();
-
-        foreach($this->performance_ranges_display as $value)
+        
+        if($this->type == 'Time')
         {
-          DB::table('performance_ranges')->insert([
-            'metricid' => $metric_data->id,
-            'range' => $value['range'],
-            'percentage' => $value['percentage'],
-            'from' => $value['from'],
-            'to' => $value['to'],
-            ]); 
+          foreach($this->performance_ranges_display as $value)
+          {
+            $from = ConvertingTime::convert_seconds($value['from']);
+            $to = ConvertingTime::convert_seconds($value['to']);
+            DB::table('performance_ranges')->insert([
+              'metricid' => $metric_data->id,
+              'range' => $value['range'],
+              'percentage' => $value['percentage'],
+              'from' => $from,
+              'to' => $to,
+              ]); 
+          }
+        }
+        else
+        {
+          foreach($this->performance_ranges_display as $value)
+          {
+            DB::table('performance_ranges')->insert([
+              'metricid' => $metric_data->id,
+              'range' => $value['range'],
+              'percentage' => $value['percentage'],
+              'from' => $value['from'],
+              'to' => $value['to'],
+              ]); 
+          }
         }
 
       $alert = [

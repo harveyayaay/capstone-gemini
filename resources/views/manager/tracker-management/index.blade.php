@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Tracker Management')
+@section('title', 'Tracker')
 @section('caption', '(Caption..)')
 @section('content')
 

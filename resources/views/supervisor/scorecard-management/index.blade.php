@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Scorecard Management')
+@section('title', 'Scorecard')
 @section('caption', '(Caption..)')
 @section('content')
 

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\LandingPageController;
+
 use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
 use App\Http\Controllers\Manager\EmployeeManagementController;
@@ -32,6 +35,8 @@ use App\Http\Controllers\LogoutController;
 Route::get('/', function () {
   return redirect()->to('/login');
 });
+
+Route::get('/', [LandingPageController::class, 'index']);
 
 // MANAGER
 Route::middleware('auth')->group(function(){

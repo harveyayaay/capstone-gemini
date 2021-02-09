@@ -30,7 +30,14 @@
     <div class="card-body bg-blue-900">
       <div class="container">
         <div class="card">
-          <div class="card-body">
+          @if($page == 1)
+            <div class="card-body text-blue-900 font-weight-bold p-2">Fill Metric Details</div>
+          @elseif($page == 2)
+            <div class="card-body text-blue-900 font-weight-bold p-2">Set Percentages per Range</div>
+          @elseif($page == 3)
+            <div class="card-body text-blue-900 font-weight-bold p-2">Performance Ranges Preview</div>
+          @endif
+            <div class="card-body">
           @if($page == 1)
             <label for="metric" class="col-form-label-sm">Metric</label>
             <input type="text" class="form-control form-control-sm" id="metric" name="title" wire:model="title"  required> 
@@ -49,7 +56,12 @@
             @endif
             <label for="inputPassword" class="col-form-label-sm">Reference</label>
             <select id="reference" name="reference" wire:model="reference"  class="form-control form-control-sm">
-              <option selected>All</option>
+              @if($references != null)
+                <option selected>All</option>
+                @foreach($references as $reference)
+                  <option>{{$reference->title}}</option>
+                @endforeach
+              @endif
             </select>
 
             <div class="d-flex justify-content-end text-center m-3">

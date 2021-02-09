@@ -12,7 +12,7 @@
         <table class="table table-sm ">
           <thead class="text-blue-900 font-weight-bold">
             <tr>
-              <td>Frontliner Name</td>
+              <td>Frontlinerasdsa Name</td>
               <td class="text-center">Volume</td>
               <td class="text-center">Average</td>
             </tr>
