@@ -27,5 +27,26 @@ class DatabaseSeeder extends Seeder
         'password' => Hash::make("qwer1234"),
         'profile_photo_path' => 'photos/IHoYLyrAkh6SA5mfz6hnEYfxWp7lD4Ua1j7eDiEb.png',
       ]);   
+      
+      DB::table('qa_reference')->insert([
+        'percentage' => 100,
+        'score' => '3.0',
+      ]);   
+      DB::table('qa_reference')->insert([
+        'percentage' => 96,
+        'score' => '2.5',
+      ]);   
+      DB::table('qa_reference')->insert([
+        'percentage' => 90,
+        'score' => '2.0',
+      ]);   
+      DB::table('qa_reference')->insert([
+        'percentage' => 85,
+        'score' => '1.5',
+      ]);   
+      DB::table('qa_reference')->insert([
+        'percentage' => 80,
+        'score' => '1.0',
+      ]);   
     }
 }

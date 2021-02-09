@@ -26,6 +26,8 @@ class ScorecardManagementController extends Controller
     {
       $overall = 0;
       $scorecard_details = array();
+      $qa_details = array();
+      $esc_details = array();
 
       $data['metrics_data'] = DB::table('metrics')
         ->where('status','Active')
@@ -128,16 +130,94 @@ class ScorecardManagementController extends Controller
           ));
         }
       }
+      
+      // Quality Assurance
+      $data['qa'] = DB::table('qa_list')
+        ->where('empid',$user->id)
+        ->first();
 
-      // dd($scorecard_details);
+      if($data['qa'] == null)
+      {
+        DB::table('qa_list')->insert([
+          'empid' => $user->id,
+          'percentage' => 100,
+          ]); 
+        $qa_actual = 100;
+      }
+      else
+      {
+        $qa_actual = $data['qa']->percentage;
+      }
+
+      $data['qa_reference'] = DB::table('qa_reference')
+        ->orderBy('percentage', 'asc')
+        ->get();
+
+      $qa_score = 0;
+      $qa_goal = 0;
+      $qa_percentage = 0;
+      foreach($data['qa_reference'] as $value)
+      {
+        if($value->percentage >= $qa_actual)
+        {
+          $qa_score = $value->score;
+          $qa_percentage = $value->percentage;
+        }
+        if($value->percentage > $qa_goal)
+          $qa_goal = $value->percentage;
+      }
+
+      array_push($qa_details,array(
+        "titles" => 'Quality Assurance',
+        "actuals" => $qa_actual,
+        "goals" => $qa_goal,
+        "percentages" => $qa_percentage,
+        "ranges" => $qa_score,
+      ));
+
+      // Escalations
+      $data['escalations'] = DB::table('escalations')
+        ->where('empid',$user->id)
+        ->first();
+
+      if($data['escalations'] == null)
+        $esc_actual = 0;
+      else
+        $esc_actual = $data['escalations']->escalation;
+
+      array_push($esc_details,array(
+        "titles" => 'Escalations',
+        "actuals" => $esc_actual,
+        "goals" => 0,
+      ));
+
+      $total_score_from_scorecard = 0;
+      $count_metrics = 0;
+      foreach($scorecard_details as $get_scores)
+      {
+        $total_score_from_scorecard += $get_scores['ranges'];
+        ++$count_metrics;
+      }
+
+      $average_score_from_scorecard = $total_score_from_scorecard/$count_metrics;
+      if($esc_actual == 1)
+        $overall_score_from_scorecard = ($average_score_from_scorecard / 100); //* 80; get 80%, 20% duduction
+      elseif($esc_actual > 1)
+        $overall_score_from_scorecard = 1; //* 80; get 80%, 20% duduction
+      else
+        $overall_score_from_scorecard = $average_score_from_scorecard;
 
       array_push($user_scorecard,array(
         "id" => $user->id,
         "name" => $user->firstname.' '.$user->lastname,
         "scorecard" => $scorecard_details,
-        "overall" => $overall/3,
+        "qa" => $qa_details,
+        "esc" => $esc_details,
+        "overall" => $overall_score_from_scorecard,
       ));
     }
+
+
 
     $records = array();
 
@@ -156,6 +236,7 @@ class ScorecardManagementController extends Controller
         "perf_record" => $data2,
       ));
     }
+
 
     if(Auth::user()->position == "Frontliner")
       return view("frontliner.scorecard-management.index",compact('records','user_scorecard'));

@@ -49,32 +49,36 @@
                       <td class="text-center">{{number_format($val['ranges'], 1, '.', '')}}</td>
                     </tr>
                   @endforeach
+                  @foreach($value['qa'] as $val)
                     <tr>
+                      <td>{{$val['titles']}}</td>
+                      <td class="text-center">{{$val['actuals']}}</td>
+                      <td class="text-center">{{$val['goals']}}</td>
+                      <td class="text-center">{{$val['percentages']}}%</td>
+                      <td class="text-center">{{number_format($val['ranges'], 1, '.', '')}}</td>
+                    </tr>
+                  @endforeach
+                  @foreach($value['esc'] as $val)
+                    <tr>
+                      <td>{{$val['titles']}}</td>
+                      <td class="text-center">{{$val['actuals']}}</td>
+                      <td class="text-center">{{$val['goals']}}</td>
+                      <td colspan="2"></td>
+                    </tr>
+                  @endforeach
+                    <!-- <tr>
                       <td>Quality Assurance</td>
                       <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="0" required> -->
-                        0
+                        <input type="text" class="form-control form-control-sm" value="0" required>
+                        
                       </td>
                       <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="100" required> -->
-                        0
+                        <input type="text" class="form-control form-control-sm" value="100" required>
+                        
                       </td>
-                      <td class="text-center">0%</td>
-                      <td class="text-center">0</td>
-                    </tr>
-                    <tr>
-                      <td>Escalation</td>
-                      <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="0" required> -->
-                        0
-                      </td>
-                      <td class="text-center">
-                        <!-- <input type="text" class="form-control form-control-sm" value="0" required> -->
-                        0
-                      </td>
-                      <td class="text-center">100%</td>
-                      <td class="text-center">3</td>
-                    </tr>
+                      <td class="text-center"></td>
+                      <td class="text-center"></td>
+                    </tr> -->
                     <tr>
                       <td class="font-weight-bold text-blue-900">OVERALL SCORE</td>
                       <td></td>
