@@ -13,8 +13,9 @@ class ScorecardManagement extends Component
 {
 
     public $page;
-    public $title = '';
+    public $title = 'Average App';
     public $type;
+    public $type_last;
     public $samplegoal = '00:05:00';
     public $goal;
     public $reference;
@@ -30,9 +31,10 @@ class ScorecardManagement extends Component
     
     public function mount()
     {
-      $this->page = 1;
+      $this->page = 3;
       $this->reference = 'All';
       $this->type = 'Time';
+      $this->type_last = 'Time';
       $this->next = false;
     }
     public function next()
@@ -48,15 +50,29 @@ class ScorecardManagement extends Component
     public function render()
     {
       $percentages = [];
+      $percentages_time = [];
       $ranges = [];
       $from = [];
       $to = [];
+
+
       if($this->page == 1)
       {
-        $this->next = false;
+        if($this->type != $this->type_last)
+        {
+          $this->samplegoal = null;
+          $this->type_last = $this->type;
+        }
         if($this->type == 'Time')
         {
+          $this->next = false;
           if(DateTime::createFromFormat('H:i:s', $this->samplegoal) && Str::length($this->title) > 0)
+            $this->next = true;
+        }
+        elseif($this->type == 'Volume')
+        {
+          $this->next = false;
+          if(Str::length($this->samplegoal) > 0 && Str::length($this->title) > 0)
             $this->next = true;
         }
       }
@@ -99,25 +115,15 @@ class ScorecardManagement extends Component
             $ranges[] = $base_range;
             $base_range = $base_range - .5;
           }
-  
-  
-          // $total_hash = Hash::make($title.$type.$goal.$status);
-          
-          // DB::table('metrics')->insert([
-          //   'title' => $title,
-          //   'type' => $type,
-          //   'goal' => $goal_seconds,
-          //   'status' => $status,
-          //   'total_hash' => $total_hash,
-          // ]); 
-  
-          // $data = DB::table('metrics')
-          //   ->select('id')
-          //   ->where('total_hash',$total_hash)
-          // ->first();
+
+          $percentages_time[] = $this->percentage1;
+          $percentages_time[] = $this->percentage2;
+          $percentages_time[] = $this->percentage3;
+          $percentages_time[] = $this->percentage4;
+          $percentages_time[] = $this->percentage5;
   
           $ctr = 0;
-          foreach($percentages as $percentage)
+          foreach($percentages_time as $percentage)
           {
               array_push($performance_ranges_display,array(
                 'range' => $ranges[$ctr],
@@ -125,13 +131,6 @@ class ScorecardManagement extends Component
                 'from' => ConvertingTime::convert_time($from[$ctr]),
                 'to' => ConvertingTime::convert_time($to[$ctr]),
               ));
-            // DB::table('performance_ranges')->insert([
-            //   'metricid' => $data->id,
-            //   'range' => $ranges[$ctr],
-            //   'percentage' => $percentage,
-            //   'from' => $from[$ctr],
-            //   'to' => $to[$ctr],
-            //   ]); 
   
             ++$ctr;
           }
@@ -178,182 +177,37 @@ class ScorecardManagement extends Component
         }
       }
 
-
-    //   $this->ranges = array('3.0','2.5', '2.0', '1.5', '1.0');
-
-    //   if($this->type == 'Time')
-    //   {
-    //     if(Str::of($this->goal)->length() > 7)
-    //     {
-    //       if (DateTime::createFromFormat('H:i:s', $this->goal)) 
-    //       {
-    //         $goal = strtotime($this->goal)-strtotime('00:00:00');
-    //         if($goal > 86399)
-    //         {
-    //           $this->exceeds = true;
-    //           $this->perf_ranges = false;
-    //         }
-    //         else
-    //         {
-    //           $this->exceeds = false;
-    //           $goal_divided = intval($goal / 4);
-            
-    //           if($goal > 7)
-    //           {
-    //             $this->data_from_1 = ConvertingTime::convert_time($goal_divided * 4);
-    //             $this->data_from_2 = ConvertingTime::convert_time($goal_divided * 3);
-    //             $this->data_from_3 = ConvertingTime::convert_time($goal_divided * 2);
-    //             $this->data_from_4 = ConvertingTime::convert_time($goal_divided * 1);
-    //             $this->data_from_5 = ConvertingTime::convert_time($goal_divided * 0);
-
-    //             $this->data_to_1 = 'above';
-    //             $this->data_to_2 = ConvertingTime::convert_time(($goal_divided * 4) - 1);
-    //             $this->data_to_3 = ConvertingTime::convert_time(($goal_divided * 3) - 1);
-    //             $this->data_to_4 = ConvertingTime::convert_time(($goal_divided * 2) - 1);
-    //             $this->data_to_5 = ConvertingTime::convert_time(($goal_divided * 1) - 1);
-
-    //             $this->perf_record = array(
-    //               "first" => array(
-    //                   'range' => 3.0,
-    //                   'from' => $this->data_from_1,
-    //                   'to' => $this->data_to_1,
-    //               ), 
-    //               "second" => array(
-    //                   'range' => 2.5,
-    //                   'from' => $this->data_from_2,
-    //                   'to' => $this->data_to_2,
-    //               ), 
-    //               "third" => array(
-    //                   'range' => 2.0,
-    //                   'from' => $this->data_from_3,
-    //                   'to' => $this->data_to_3,
-    //               ), 
-    //               "fourth" => array(
-    //                   'range' => 1.5,
-    //                   'from' => $this->data_from_4,
-    //                   'to' => $this->data_to_4,
-    //               ), 
-    //               "fifth" => array(
-    //                   'range' => 1.0,
-    //                   'from' => $this->data_from_5,
-    //                   'to' => $this->data_to_5,
-    //               )
-    //             );
-    //           }
-    //           else
-    //           {
-    //             $this->data_from_5=$this->data_from_4=$this->data_from_3=$this->data_from_2=$this->data_from_1=$this->data_to_5=$this->data_to_4=$this->data_to_3=$this->data_to_2=$this->data_to_1= '00:00:00';
-    //           }
-
-    //           $this->perf_ranges = true;
-    //         }
-    //       }
-    //       else
-    //       {
-    //         $this->perf_ranges = false;
-    //       }
-    //     }
-    //     else
-    //     {
-    //       $this->perf_ranges = false;
-    //     }
-    //   }
-    //   else if($this->type == 'Percentage')
-    //   {
-    //     // $this->goal = preg_replace('/\d/', '', $this->goal);
-    //     $this->goal = preg_replace('/[^0-9]/', '', $this->goal);
-    //     if($this->goal != null)
-    //       $goal = intval($this->goal / 4);
-    //     else  
-    //       $goal = intval($this->goal);
-
-        
-    //     if($this->goal > 4 && $this->goal != null)
-    //     {
-    //       $this->perf_ranges = true;
-    //       $this->data_from_1 = $goal * 4;
-    //       $this->data_from_2 = $goal * 3;
-    //       $this->data_from_3 = $goal * 2;
-    //       $this->data_from_4 = $goal * 1;
-    //       $this->data_from_5 = $goal * 0;
-  
-    //       $this->data_to_1 = 'above';
-    //       $this->data_to_2 = ($goal * 4) - 1;
-    //       $this->data_to_3 = ($goal * 3) - 1;
-    //       $this->data_to_4 = ($goal * 2) - 1;
-    //       $this->data_to_5 = ($goal * 1) - 1;
-
-    //       $this->perf_record = array(
-    //           "first" => array(
-    //               'range' => 3.0,
-    //               'from' => $this->data_from_1,
-    //               'to' => $this->data_to_1,
-    //           ), 
-    //           "second" => array(
-    //               'range' => 2.5,
-    //               'from' => $this->data_from_2,
-    //               'to' => $this->data_to_2,
-    //           ), 
-    //           "third" => array(
-    //               'range' => 2.0,
-    //               'from' => $this->data_from_3,
-    //               'to' => $this->data_to_3,
-    //           ), 
-    //           "fourth" => array(
-    //               'range' => 1.5,
-    //               'from' => $this->data_from_4,
-    //               'to' => $this->data_to_4,
-    //           ), 
-    //           "fifth" => array(
-    //               'range' => 1.0,
-    //               'from' => $this->data_from_5,
-    //               'to' => $this->data_to_5,
-    //           )
-    //       );
-    //     }
-    //     else
-    //     {
-    //       $this->data_from_1 = $this->data_from_2 = $this->data_from_3 = $this->data_from_4 = $this->data_from_5 = $this->data_to_1 = $this->data_to_2 =  $this->data_to_3 =  $this->data_to_4 =  $this->data_to_5 = 0;
-    //     }
-    //   }
-
-    //   $this->references['task_lists'] = DB::table('task_lists')
-    //     ->where('type', 'Productive')
-    //     ->where('status', 'Active')
-    //     ->get();
-
       return view('livewire.manager.scorecard-management');
     }
 
     public function save()
     {
-      dd($this->perf_record);
+        $total_hash = Hash::make($this->title.$this->type.$this->goal.$this->reference);
 
-      $store_data = [
-          'title' => $this->title, 
+        DB::table('metrics')->insert([
+          'title' => $this->title,
           'type' => $this->type,
           'goal' => $this->goal,
           'status' => 'Active',
           'reference' => $this->reference,
-          'total_hash' => Hash::make($this->title.$this->type.$this->goal.$this->reference),
-        ];
-      $store = DB::table('metrics')->insert($store_data);
+          'total_hash' => $total_hash,
+        ]); 
 
-      $get_data = DB::table('metrics')
-          ->where('total_hash', $store_data['total_hash'])
-          ->first();
+        $metric_data = DB::table('metrics')
+          ->select('id')
+          ->where('total_hash',$total_hash)
+        ->first();
 
-      foreach ($this->perf_record as $key => $value) 
-      {
-        $store_data_2 = [
-          'metricid' => $get_data->id, 
-          'range' => $value['range'],
-          'from' => $value['from'],
-          'to' => $value['to'],
-        ];
-
-        $store = DB::table('performance_ranges')->insert($store_data_2);
-      }
+        foreach($this->performance_ranges_display as $value)
+        {
+          DB::table('performance_ranges')->insert([
+            'metricid' => $metric_data->id,
+            'range' => $value['range'],
+            'percentage' => $value['percentage'],
+            'from' => $value['from'],
+            'to' => $value['to'],
+            ]); 
+        }
 
       $alert = [
           'type'    => 'success',

@@ -42,8 +42,11 @@
             </select>
 
             <label for="goal" class="col-form-label-sm">Goal</label>
-
-            <input type="text" class="form-control form-control-sm" name="samplegoal" wire:model="samplegoal" required>
+            @if($type == 'Time')
+              <input type="text" class="form-control form-control-sm" name="samplegoal" wire:model="samplegoal">
+            @elseif($type == 'Volume')
+              <input type="number" class="form-control form-control-sm" name="samplegoal" wire:model="samplegoal">
+            @endif
             <label for="inputPassword" class="col-form-label-sm">Reference</label>
             <select id="reference" name="reference" wire:model="reference"  class="form-control form-control-sm">
               <option selected>All</option>
@@ -51,7 +54,7 @@
 
             <div class="d-flex justify-content-end text-center m-3">
               @if($next == true)
-                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next</button>
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next ></button>
               @else
                 <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" disabled>Next</button>
               @endif
@@ -82,9 +85,9 @@
               </table>
             </div>
             <div class="d-flex justify-content-end text-center m-3">
-              <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2">Prev</button>
+              <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-danger text-white mb-2 mr-2">< Prev</button>
               @if($next == true)
-                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next</button>
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next ></button>
               @else
                 <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" disabled>Next</button>
               @endif
@@ -115,8 +118,8 @@
               @endforeach
             </table>
             <div class="d-flex justify-content-end text-center m-3">
-              <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2">Prev</button>
-              <button wire:click="" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Save</button>
+              <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-danger text-white mb-2 mr-2">< Prev</button>
+              <button wire:click="save" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Save</button>
               <!-- <input type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" value="Next" disabled> -->
             </div>
           @endif  
