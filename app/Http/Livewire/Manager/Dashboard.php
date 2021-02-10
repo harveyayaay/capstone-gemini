@@ -7,11 +7,24 @@ use DB;
 
 class Dashboard extends Component
 {
+    public $date_from;
+    public $date_to;
+    public $data_volume = [];
+    public $data_dates = [];
+    public $labels;
+
     public function render()
     {
+      if($this->date_to < '2021-02-06')
+      {
+        $this->labels = 'Gaga';
+      }
+      $this->data_volume = [];
+      $this->data_dates = [];
+
       // MTD Productivity 
-      $basedate = date('Y-m-d', strtotime(date('Y-m')));
-      while($basedate <= date('Y-m-d'))
+      $basedate = $this->date_from;
+      while($basedate <= $this->date_to)
       {
         $count = DB::table('tasks')
           ->where('current_date','>=', $basedate)
@@ -19,11 +32,13 @@ class Dashboard extends Component
           ->where('status', 'Completed')
           ->count();
         
-          $data['mtd_task_volume'][]= $count;
-          $data['mtd_task_dates'][] = date('F j',strtotime($basedate));
+          $this->data_volume[] = $data['mtd_task_volume'][]= $count;
+          $this->data_dates[] = $data['mtd_task_dates'][] = date('F j',strtotime($basedate));
         
         $basedate = date('Y-m-d', strtotime('+1 day', strtotime($basedate)));
       }
+
+      // dump($data['mtd_task_volume']);
 
       // List of Productivity per Frontliner
       $data['users'] = DB::table('users')
@@ -31,16 +46,17 @@ class Dashboard extends Component
         ->where('users.status','Active')
         ->where('users.position','Frontliner')
         ->get();
-      $data['list_users_prod'] = array();
 
-      $loop = 1;
+      $data['list_users_prod'] = array();
+      $data['list_users_ongoing'] = array();
+      
       foreach($data['users'] as $user)
       {
         $prod_volume_count = 0;
         $prod_total_days = 0;
         $prod_average = 0;
-        $basedate = date('Y-m-d', strtotime(date('Y-m')));
-        while($basedate <= date('Y-m-d'))
+        $basedate = $this->date_from;
+        while($basedate <= $this->date_to)
         {
           $count = DB::table('tasks')
             ->where('current_date','>=', $basedate)
@@ -60,17 +76,43 @@ class Dashboard extends Component
         }
         else
           $prod_average = $prod_volume_count;
+        
+        $data['qa_info'] = DB::table('qa_list')
+          ->where('empid',$user->id)
+          ->first();
+        
+        $data['esc_info'] = DB::table('escalations')
+          ->where('empid',$user->id)
+          ->first();
+        
+        // Ongoing Tasks
+        $data['task_info'] = DB::table('tasks')
+          ->join('task_lists','tasks.task_lists_id','=','task_lists.id')
+          ->select('tasks.*','task_lists.title')
+          ->where('tasks.empid',$user->id)
+          ->where('tasks.status','Ongoing')
+          ->where('tasks.current_date','>',date('Y-m-d',strtotime('-1 day',strtotime(date('Y-m-d')))))
+          ->where('tasks.current_date','<',date('Y-m-d',strtotime('+1 day',strtotime(date('Y-m-d')))))
+          ->first();
 
-          // dd($data['titles']);
+        if($data['task_info'] != null)
+        {
+          array_push($data['list_users_ongoing'],array(
+            "firstname" => $user->firstname,
+            "lastname" => $user->lastname,
+            "task_ongoing" => $data['task_info']->title,
+          ));
+        } 
 
+        // Result List of Users Prod 
         array_push($data['list_users_prod'],array(
             "firstname" => $user->firstname,
             "lastname" => $user->lastname,
             "volume" => $prod_volume_count,
             "average" => number_format((float)$prod_average, 2, '.', ''),
-            // // samples for average per activity
-            "Canvas" => $loop++,
-            "duration" => date('H:i:s',strtotime("00:".$prod_volume_count.":".$loop))  ,
+            "qa" => $data['qa_info']->percentage,
+            "esc" => $data['esc_info']->escalation,
+            "Canvas" => 1,
         ));
       }
 
@@ -107,5 +149,12 @@ class Dashboard extends Component
       $data['user_count_vol3'][] = 1;
 
       return view('livewire.manager.dashboard', $data);
+    }
+
+    public function mount()
+    {
+      $this->labels = 'Gago';
+        $this->date_from = date('Y-m-d', strtotime(date('Y-m')));
+        $this->date_to = date('Y-m-d');
     }
 }

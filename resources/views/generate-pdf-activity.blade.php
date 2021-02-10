@@ -39,38 +39,16 @@
   }
   
 </style>
-<!-- <table>
-  <tr>
-    <td rowspan="3">
-      <img src="https://cdn2.iconfinder.com/data/icons/goodreads-1/512/goodreads-round-dark-1-512.png" alt="logo" height="200" width="200" class="h-3 w-3">
-    </td>
-    
-  <tr>
-  <td>
-      <h3><strong>COMPANY NAME</strong></h3>
-    <td>
-  </tr>
-    <td>
-      <label><i class="fa fa-map-marker col" aria-hidden="true"></i> Company Address, VMapa, Sta.Mesa, Manila</label>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label><i class="fa fa-phone col" aria-hidden="true"></i> 743-34-53</label>
-    </td>
-  </tr>
-</table> -->
 
   <div class="row text-center">
     <!-- <div class="col-sm-3">
       <img src="https://cdn2.iconfinder.com/data/icons/goodreads-1/512/goodreads-round-dark-1-512.png" alt="logo" height="200" width="200" class="h-3 w-3">
     </div> -->
     <div class="col-sm-12">
-          <h3><strong>COMPANY NAME</strong></h3>
-          <p>Company Address, VMapa, Sta.Mesa, Manila <br>743-34-53</p>
+          <h3><strong>TEAM GEMINI</strong></h3>
+          <p>{{date('F j',strtotime($from)).' - '.date('F j',strtotime($to))}}</p>
     </div>
   </div>
-
 
   <table class="table table-sm text-center table-bordered">
     <thead class="bg-dark text-white">
@@ -90,14 +68,14 @@
     @forelse($tasks as $value)
       <tr>
         <td>{{date('Y-m-d', strtotime($value->current_date))}}</td>
-        <td>{{$value->type}}</td>
+        <td>{{$value->title}}</td>
         <td>{{$value->case_num}}</td>
         <td>{{$value->date_received}}</td>
         <td>{{$value->time_start}}</td>
         <td>{{$value->time_end}}</td>
         <td>{{$value->hold_duration}}</td>
         <td>{{$value->process_duration}}</td>
-        <td>{{$value->empid}}</td>
+        <td>{{$value->firstname.' '.$value->lastname}}</td>
       </tr>
     @empty
       <tr>
@@ -106,6 +84,11 @@
     @endforelse
     </tbody>
   </table>
+  <!-- <div class="fixed-bottom"> -->
+    <div class="ml-5 mt-4">Total Count: {{$total}}</div>
+    <div class="ml-5 mt-4">Average Processed Time: {{$average}}</div>
+    <div class="ml-5 mt-4">Printed on: {{date('F j, Y - H:i a')}}</div>
+  <!-- </div> -->
 </body>
 </html>
 
