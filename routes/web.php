@@ -36,7 +36,7 @@ Route::get('/', function () {
   return redirect()->to('/login');
 });
 
-Route::get('/', [LandingPageController::class, 'index']);
+// Route::get('/', [LandingPageController::class, 'index']);
 
 // MANAGER
 Route::middleware('auth')->group(function(){
@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function(){
     // SCORECARD MANAGEMENT
     Route::get('/admin/scorecard-management', [ScorecardManagementController::class, 'index']);
     Route::get('/admin/scorecard-management/add', [ScorecardManagementController::class, 'add']);
+    Route::get('/admin/scorecard-management/edit/{id}', [ScorecardManagementController::class, 'edit']);
 
     // GENERATE REPORT
     Route::get('/admin/generate-report', [ManagerGenerateReportController::class, 'index']);

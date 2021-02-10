@@ -11,8 +11,10 @@ use Illuminate\Support\Facades\Hash;
 
 class ScorecardManagement extends Component
 {
+    public $edit_id; //for editing metric purpose
 
-    public $page;
+    public $action; // add or edit
+    public $page; // page shown
     public $title;
     public $type;
     public $type_last;
@@ -20,7 +22,7 @@ class ScorecardManagement extends Component
     public $goal;
     public $references;
     public $reference;
-    public $next;
+    public $next; // enables/disables net button
 
     public $percentage1;
     public $percentage2;
@@ -30,13 +32,55 @@ class ScorecardManagement extends Component
 
     public $performance_ranges_display = array();
     
-    public function mount()
+    public function mount($metricid)
     {
-      $this->page = 1;
-      $this->reference = 'All';
-      $this->type = 'Time';
-      $this->type_last = 'Volume';
-      $this->next = false;
+      if($metricid == null)
+      {
+        $this->action = 'add';
+        $this->page = 1;
+        $this->reference = 'All';
+        $this->type = 'Time';
+        $this->type_last = 'Volume';
+        $this->next = false;
+      }
+      else
+      {
+        $this->edit_id = $metricid;
+        $this->action = 'edit';
+        $this->page = 3;
+        $this->next = false;
+        $data['edit_metric'] = DB::table('metrics')
+          ->where('id',$metricid)
+          ->get();
+        
+        foreach($data['edit_metric'] as $metric_info)
+        {
+          $this->title = $metric_info->title;
+          $this->type = $this->type_last = $metric_info->type;
+          if($metric_info->type == 'Time')
+            $this->samplegoal = ConvertingTime::convert_time($metric_info->goal);
+          else
+            $this->samplegoal = $metric_info->goal;
+          $this->goal = $metric_info->goal;
+          $this->reference = $metric_info->reference;
+
+          $data['edit_perf_ranges'] = DB::table('performance_ranges')
+            ->where('metricid',$metric_info->id)
+            ->get();
+          
+          $count_perf = 0;
+          foreach($data['edit_perf_ranges'] as $perf_ranges_info)
+          {
+            $percentage[$count_perf] = $perf_ranges_info->percentage;
+            ++$count_perf;
+          }
+          $this->percentage1 = $percentage[0];
+          $this->percentage2 = $percentage[1];
+          $this->percentage3 = $percentage[2];
+          $this->percentage4 = $percentage[3];
+          $this->percentage5 = $percentage[4];
+        }
+      }
     }
     public function next()
     {
@@ -189,6 +233,8 @@ class ScorecardManagement extends Component
 
     public function save()
     {
+      if($this->action == 'add')
+      {
         $total_hash = Hash::make($this->title.$this->type.$this->goal.$this->reference);
 
         DB::table('metrics')->insert([
@@ -233,11 +279,71 @@ class ScorecardManagement extends Component
               ]); 
           }
         }
+        session()->flash('success', 'Metric Added');
+        return redirect()->to('/supervisor/scorecard-management');
+      }
+      else
+      {
+        $update_data = [
+          'title' => $this->title,
+          'type' => $this->type,
+          'goal' => $this->goal,
+          'status' => 'Active',
+          'reference' => $this->reference,
+        ];
+        $update = DB::table('metrics')->where('id',$this->edit_id)->update($update_data);
 
-      $alert = [
-          'type'    => 'success',
-          'message' => 'A section has been successfully added.'
-      ];
-      return redirect()->to('/admin/scorecard-management');
+        $data['get_perf_update'] = DB::table('performance_ranges')
+          ->select('id')
+          ->where('metricid',$this->edit_id)
+          ->get();
+
+        $perf_id_arr = [];
+        foreach($data['get_perf_update'] as $perf_id)
+        {
+            $perf_id_arr[] = $perf_id->id;
+        }
+        
+        if($this->type == 'Time')
+        { 
+          $ctr_perf_id = 0;
+          foreach($this->performance_ranges_display as $value)
+          {
+            $from = ConvertingTime::convert_seconds($value['from']);
+            $to = ConvertingTime::convert_seconds($value['to']);
+              
+            $update_data = [
+              'range' => $value['range'],
+              'percentage' => $value['percentage'],
+              'from' => $from,
+              'to' => $to,
+            ];
+            $update = DB::table('performance_ranges')
+              ->where('metricid',$this->edit_id)
+              ->where('id',$perf_id_arr[$ctr_perf_id])
+              ->update($update_data);
+            ++$ctr_perf_id;
+          }
+        }
+        else
+        {
+          foreach($this->performance_ranges_display as $value)
+          {
+            $update_data = [
+              'range' => $value['range'],
+              'percentage' => $value['percentage'],
+              'from' =>  $value['from'],
+              'to' => $value['to'],
+            ];
+            $update = DB::table('performance_ranges')
+              ->where('metricid',$this->edit_id)
+              ->where('id',$perf_id_arr[$ctr_perf_id])
+              ->update($update_data);
+            ++$ctr_perf_id;
+          }
+        }
+        session()->flash('success', 'Metric Updated');
+        return redirect()->to('/supervisor/scorecard-management');
     }
+  }
 }

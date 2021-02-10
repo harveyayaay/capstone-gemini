@@ -3,6 +3,6 @@
 @section('title', 'Scorecard')
 @section('caption', '(Caption..)')
 
-  @livewire('manager.scorecard-management', ["metricid" => null])
+  @livewire('manager.scorecard-management', ["metricid" => $metricid])
 
 @endsection

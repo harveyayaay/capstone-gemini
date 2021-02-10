@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Manager\TrackerManagement;
 use DB;
+
 class TrackerManagementController extends Controller
 {
     public function index()
@@ -48,7 +49,7 @@ class TrackerManagementController extends Controller
           'type'    => 'success',
           'message' => 'A section has been successfully added.'
       ];
-      return redirect()->to('/admin/tracker-management')->with('alert',$alert);
+      return redirect()->to('/admin/tracker-management');
       // }
     }
 
