@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@section('title', 'Tracker Management')
+@section('title', 'Tracker')
 @section('caption', '(Caption..)')
 <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Edit Tracker</h6></div>
 <div class="card">

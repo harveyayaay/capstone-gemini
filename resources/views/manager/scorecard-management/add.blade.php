@@ -1,11 +1,8 @@
 @extends('layouts.app')
 @section('content')
-@section('title', 'Scorecard Management')
+@section('title', 'Scorecard')
 @section('caption', '(Caption..)')
 
-<form action="#" method="POST">
-  @csrf 
-  @livewire('manager.scorecard-management')
-</form>
+  @livewire('manager.scorecard-management', ["metricid" => null])
 
 @endsection

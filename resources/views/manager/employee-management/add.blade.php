@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@section('title', 'Employee Management')
+@section('title', 'Employee')
 @section('caption', '(Caption..)')
 <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Add Employee</h6></div>
 <form action="/admin/employee-management/store" method="POST">

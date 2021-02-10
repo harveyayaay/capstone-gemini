@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Activity Monitoring')
+@section('title', 'Activity Tracker')
 @section('caption', '(Caption..)')
 @section('content')
 
@@ -8,7 +8,7 @@
     <div class="card-body"> 
       <p>Ongoing Activity</p>
       <table class="table table-sm text-center">
-        <thead class="bg-secondary text-white">
+        <thead class="text-blue-900 font-weight-bold">
           <tr>
             <td>Task Name</td>
             <td>Case No.</td>

@@ -1,88 +1,150 @@
 <div>
-  <div class="row">
-    <div class="col-lg-8 col-sm-12 col-md-12">
-    <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Add Metric</h6></div>
-      <div class="card">
-        <div class="card-body">
-
-          <label for="metric" class="col-form-label-sm">Metric</label>
-          <input type="text" class="form-control form-control-sm" id="metric" name="title" wire:model="title"  required> 
-
-          <label for="inputPassword" class="col-form-label-sm">Range Type</label>
-          <select name="type" class="form-control form-control-sm" name="type" wire:model="type">
-            <option selected>Time</option>
-            <option>Percentage</option>
-          </select>
-
-          <label for="goal" class="col-form-label-sm">Goal</label>
-          @if($exceeds == true)
-            <label for="goal" class="col-form-label-sm text-danger">(It must not exceed limit (24 hrs below allowed))</label>
-          @elseif(Str::of($goal)->length() > 7 && $perf_ranges == false && $type = 'Time')
-            <label for="goal" class="col-form-label-sm text-danger">(It must be in a proper format (hh:mm:ss))</label>
-          @endif
-
-          <input type="text" class="form-control form-control-sm" name="goal" wire:model="goal" required>
-          <label for="inputPassword" class="col-form-label-sm">Reference</label>
-          <select id="reference" name="reference" wire:model="reference"  class="form-control form-control-sm">
-            <option selected>All</option>
-            
-            @foreach($references['task_lists'] as $value)
-              <option>{{$value->title}}</option>
-            @endforeach
-          </select>
-          
+  <div class="card mt-3">
+    <div class="card-body">
+        <div class="row">
+          <div class="d-flex justify-content-center col">
+            @if($page == 1)
+              <span class="rounded-circle bg-blue-900 h-4 w-4"><h1 class="text-center text-white p-2">1</h1></span>
+            @else
+              <span class="rounded-circle bg-secondary h-4 w-4"><h1 class="text-center text-white p-2">1</h1></span>
+            @endif
+          </div>
+          <div class="d-flex justify-content-center col">
+            @if($page == 2)
+              <span class="rounded-circle bg-blue-900 h-4 w-4"><h1 class="text-center text-white p-2">2</h1></span>
+            @else
+              <span class="rounded-circle bg-secondary h-4 w-4"><h1 class="text-center text-white p-2">2</h1></span>
+            @endif
+          </div>
+          <div class="d-flex justify-content-center col">
+            @if($page == 3)
+              <span class="rounded-circle bg-blue-900 h-4 w-4"><h1 class="text-center text-white p-2">3</h1></span>
+            @else
+              <span class="rounded-circle bg-secondary h-4 w-4"><h1 class="text-center text-white p-2">3</h1></span>
+            @endif
+          </div>
         </div>
-      </div>
     </div>
-    <div class="col-lg-4 col-sm-12 col-md-12">
-    <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Performance Ranges</h6></div>
-      <div class="card">
-        <div class="card-body">
-          <div class="flex-fill">
-            <table class="table">
-              <tr class="bg-secondary text-white">
+  </div>
+  <div class="card mt-3">
+    <div class="card-body bg-blue-900">
+      <div class="container">
+        <div class="card">
+          @if($page == 1)
+            <div class="card-body text-blue-900 font-weight-bold p-2">Fill Metric Details</div>
+          @elseif($page == 2)
+            <div class="card-body text-blue-900 font-weight-bold p-2">Set Percentages per Range</div>
+          @elseif($page == 3)
+            <div class="card-body text-blue-900 font-weight-bold p-2">Performance Ranges Preview</div>
+          @endif
+            <div class="card-body">
+          @if($page == 1)
+            <label for="metric" class="col-form-label-sm">Metric</label>
+            <input type="text" class="form-control form-control-sm" id="metric" name="title" wire:model="title"  required> 
+
+            <label for="inputPassword" class="col-form-label-sm">Range Type</label>
+            <select name="type" class="form-control form-control-sm" name="type" wire:model="type">
+              <option selected>Time</option>
+              <option>Volume</option>
+            </select>
+
+            <label for="goal" class="col-form-label-sm">Goal</label>
+            @if($type == 'Time')
+              <input type="text" class="form-control form-control-sm" name="samplegoal" wire:model="samplegoal">
+            @elseif($type == 'Volume')
+              <input type="number" class="form-control form-control-sm" name="samplegoal" wire:model="samplegoal">
+            @endif
+            <label for="inputPassword" class="col-form-label-sm">Reference</label>
+            <select id="reference" name="reference" wire:model="reference"  class="form-control form-control-sm">
+              @if($references != null)
+                <option selected>All</option>
+                @foreach($references as $reference)
+                  <option>{{$reference->title}}</option>
+                @endforeach
+              @endif
+            </select>
+
+            <div class="d-flex justify-content-end text-center m-3">
+              @if($next == true)
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next ></button>
+              @else
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" disabled>Next</button>
+              @endif
+            </div>
+          @elseif($page == 2)
+            <div class="d-flex justify-content-center">
+              <table class="table table-sm table-borderless d-flex justify-content-center">
+                <tr>
+                  <td><label for="metric" class="col-form-label-sm col">3.0</label></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage1" wire:model="percentage1"  required></td>
+                </tr>
+                <tr>
+                  <td><label for="metric" class="col-form-label-sm col">2.5</label></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage2" wire:model="percentage2"  required></td>
+                </tr>
+                <tr>
+                  <td><label for="metric" class="col-form-label-sm col">2.0</label></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage3" wire:model="percentage3"  required></td>
+                </tr>
+                <tr>
+                  <td><label for="metric" class="col-form-label-sm col">1.5</label></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage4" wire:model="percentage4"  required></td>
+                </tr>
+                <tr>
+                  <td><label for="metric" class="col-form-label-sm col">1.0</label></td>
+                  <td><input type="number" class="form-control form-control-sm col" id="metric" name="percentage5" wire:model="percentage5"  required></td>
+                </tr>
+              </table>
+            </div>
+            <div class="d-flex justify-content-end text-center m-3">
+              <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-danger text-white mb-2 mr-2">< Prev</button>
+              @if($next == true)
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Next ></button>
+              @else
+                <button wire:click="next" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" disabled>Next</button>
+              @endif
+            </div>
+              <!-- <input type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" value="Next" disabled> -->
+         
+          @elseif($page == 3)
+            <table class="table table-sm">
+              <tr>
                 <td>Ranges</td>
                 <td>From</td>
                 <td>To</td>
               </tr>
-              <tr>
-                <td>3.0</td>
-                <td>{{$data_from_1}}</td>
-                <td>{{$data_to_1}}</td>
-              </tr>
-              <tr>
-                <td>2.5</td>
-                <td>{{$data_from_2}}</td>
-                <td>{{$data_to_2}}</td>
-              </tr>
-              <tr>
-                <td>2.0</td>
-                <td>{{$data_from_3}}</td>
-                <td>{{$data_to_3}}</td>
-              </tr>
-              <tr>
-                <td>1.5</td>
-                <td>{{$data_from_3}}</td>
-                <td>{{$data_to_4}}</td>
-              </tr>
-              <tr>
-                <td>1.0</td>
-                <td>{{$data_from_3}}</td>
-                <td>{{$data_to_5}}</td>
-              </tr>
+              @foreach($performance_ranges_display as $display)
+                @if($type == "Time")
+                <tr>
+                  <td>{{$display['range']}}</td>
+                  <td>{{$display['from']}}</td>
+                  <td>{{$display['to']}}</td>
+                </tr>
+                @else
+                <tr>
+                  <td>{{$display['range']}}</td>
+                  <td>{{$display['from']}}</td>
+                  <td>{{$display['to']}}</td>
+                </tr>
+                @endif
+              @endforeach
             </table>
+            <div class="d-flex justify-content-end text-center m-3">
+              <button wire:click="prev" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-danger text-white mb-2 mr-2">< Prev</button>
+              <button wire:click="save" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Save</button>
+              <!-- <input type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" value="Next" disabled> -->
+            </div>
+          @endif  
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-end text-center m-3">
-    @if($perf_ranges == 'true' && $title != null && $goal != null)
-      <button wire:click="save" type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-blue-900 text-white mb-2">Add Metric</button>
-    @else
-      <input type="button" class="form-control-sm col-lg-2 col-md-2 mt-2 bg-secondary text-white mb-2" value="Add Metric" disabled>
-    @endif
-  </div>  
 </div>
+
+
+
+
+
 
 

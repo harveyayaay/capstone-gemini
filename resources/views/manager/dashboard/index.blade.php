@@ -2,9 +2,7 @@
 @section('title', 'Dashboard')
 @section('caption', '(Caption..)')
 @section('content')
-<div class="card">
-  <div class="card-body"> 
+
     @livewire('manager.dashboard')
-  </div>
-</div>
+    
 @endsection

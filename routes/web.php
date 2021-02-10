@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\LandingPageController;
+
 use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
 use App\Http\Controllers\Manager\EmployeeManagementController;
@@ -14,6 +17,8 @@ use App\Http\Controllers\Manager\ProductivityReportController;
 use App\Http\Controllers\Supervisor\SupervisorDashboardController;
 use App\Http\Controllers\Supervisor\ActivityTrackerController;
 use App\Http\Controllers\Supervisor\SupervisorGenerateReportController;
+
+use App\Http\Controllers\Frontliner\FrontlinerDashboardController;
 
 use App\Http\Controllers\LogoutController;
 /*
@@ -31,11 +36,13 @@ Route::get('/', function () {
   return redirect()->to('/login');
 });
 
+// Route::get('/', [LandingPageController::class, 'index']);
+
 // MANAGER
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){
     // DASHBOARD
-    Route::get('/admin/dashboard', [ManagerDashboardController::class, 'index']);
+    Route::get('/dashboard', [ManagerDashboardController::class, 'index']);
 
     // TRACKER MANAGEMENT
     Route::get('/admin/tracker-management', [TrackerManagementController::class, 'index']);
@@ -55,6 +62,7 @@ Route::middleware('auth')->group(function(){
     // SCORECARD MANAGEMENT
     Route::get('/admin/scorecard-management', [ScorecardManagementController::class, 'index']);
     Route::get('/admin/scorecard-management/add', [ScorecardManagementController::class, 'add']);
+    Route::get('/admin/scorecard-management/edit/{id}', [ScorecardManagementController::class, 'edit']);
 
     // GENERATE REPORT
     Route::get('/admin/generate-report', [ManagerGenerateReportController::class, 'index']);
@@ -73,7 +81,7 @@ Route::middleware('auth')->group(function(){
   Route::middleware('user:Supervisor')->group(function(){
 
     // DASHBOARD
-    Route::get('/supervisor', [SupervisorDashboardController::class, 'index']);
+    Route::get('/supervisor/dashboard', [ManagerDashboardController::class, 'index']);
 
     // ACTIVITY TRACKER
     Route::get('/supervisor/activity-tracker', [ActivityTrackerController::class, 'index']);
@@ -81,11 +89,38 @@ Route::middleware('auth')->group(function(){
     Route::post('/supervisor/activity-tracker/store/', [ActivityTrackerController::class, 'store']);
     Route::post('/supervisor/activity-tracker/update/{id}/{status}', [ActivityTrackerController::class, 'update']);
 
+    // SCORECARD MANAGEMENT
+    Route::get('/supervisor/scorecard-management', [ScorecardManagementController::class, 'index']);
+
     // PRODUCTIVITY REPORT
     Route::get('/supervisor/productivity-report', [ProductivityReportController::class, 'index']);
     
     // GENERATE REPORT
     Route::get('/supervisor/generate-report', [SupervisorGenerateReportController::class, 'index']);
+  });
+});
+
+// FRONTLINER
+Route::middleware('auth')->group(function(){
+  Route::middleware('user:Frontliner')->group(function(){
+
+    // DASHBOARD
+    Route::get('/frontliner/dashboard', [ManagerDashboardController::class, 'index']);
+
+    // ACTIVITY TRACKER
+    Route::get('/frontliner/activity-tracker', [ActivityTrackerController::class, 'index']);
+    Route::get('/frontliner/activity-tracker/add-task', [ActivityTrackerController::class, 'add']);
+    Route::post('/frontliner/activity-tracker/store/', [ActivityTrackerController::class, 'store']);
+    Route::post('/frontliner/activity-tracker/update/{id}/{status}', [ActivityTrackerController::class, 'update']);
+
+    // SCORECARD MANAGEMENT
+    Route::get('/frontliner/scorecard-management', [ScorecardManagementController::class, 'index']);
+
+    // PRODUCTIVITY REPORT
+    Route::get('/frontliner/productivity-report', [ProductivityReportController::class, 'index']);
+    
+    // GENERATE REPORT
+    Route::get('/frontliner/generate-report', [SupervisorGenerateReportController::class, 'index']);
   });
 });
 

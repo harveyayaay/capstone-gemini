@@ -45,7 +45,7 @@
         <label for="field_title" class="col-form-label-sm">Total Count: {{$count}}</label>
       </div>
       <div class="d-flex justify-content-start">
-        <label for="field_title" class="col-form-label-sm">Average Processing Time: {{$process_time}}</label>
+        <!-- <label for="field_title" class="col-form-label-sm">Average Processing Time: {{$process_time}}</label> -->
       </div>
       <div class="d-flex justify-content-end text-center">
         <a class="form-control-sm col-1 btn-success" href="{{ URL::to('generate-pdf-activity/'.$reference.'/'.$status.'/'.$date_from.'/'.$date_to) }}">

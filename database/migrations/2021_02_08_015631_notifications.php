@@ -14,7 +14,7 @@ class Notifications extends Migration
     public function up()
     {
       Schema::create('notifications', function (Blueprint $table) {
-          $table->integer('id');
+          $table->increments('id');
           $table->integer('empid')->unsigned();
           $table->foreign('empid')
             ->references('id')
@@ -22,7 +22,9 @@ class Notifications extends Migration
             ->onDelete('cascade')
             ->onUpdate('cascade');
           $table->longText('message');
-          $table->string('status');
+          $table->boolean('seen');
+          $table->boolean('read');
+          $table->dateTime('date');
           $table->timestamps();
       });
     }
