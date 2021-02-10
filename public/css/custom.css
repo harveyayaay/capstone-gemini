@@ -157,3 +157,22 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
+
+.notif-div
+{
+  width: 300px;
+  font-size: 15px;
+}
+.notif-div:hover
+{
+  background-color: #F3F4F6; 
+}
+.notif-dates
+{
+  font-size: 12px;
+}
+.notif-container-div
+{
+  overflow-y: auto;
+  max-height: 600px;
+}
