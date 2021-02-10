@@ -51,6 +51,10 @@
       <!-- <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars"></i><small class="text-uppercase font-weight-bold"></small></button> -->
 
       <!-- Demo content -->
+
+
+
+
       <!-- <div class="separator"></div> -->
       <!-- Page content holder -->
   
@@ -77,7 +81,6 @@
 </html>
 
 @section('custom_js')
-
 
 <script>
 function myFunction()
@@ -115,10 +118,6 @@ setInterval(myFunction, 1000);
       }
     })
   })();
-
-  $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
-  })
 
   
   

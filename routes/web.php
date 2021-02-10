@@ -38,6 +38,7 @@ Route::get('/', function () {
 
 // Route::get('/', [LandingPageController::class, 'index']);
 
+
 // MANAGER
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){

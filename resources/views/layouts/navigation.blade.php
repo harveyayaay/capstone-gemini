@@ -3,12 +3,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <div class="dropdown">
-              <a class="" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-bell p-2 mr-2 text-blue-900" aria-hidden="true"></i>
-              </a>
               @livewire('notifications')
-            </div>
           </li>
           <li class="nav-item dropdown">
             <div class="dropdown">
