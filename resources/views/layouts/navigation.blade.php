@@ -14,7 +14,13 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                 <div class="p-2" role="button">
+                @if(Auth::user()->position == 'Manager')
+                  <a href="/admin/settings/edit">Profile</a>
+                @elseif(Auth::user()->position == 'Supervisor')
                   <a href="/supervisor/settings/edit">Profile</a>
+                @elseif(Auth::user()->position == 'Frontliner')
+                  <a href="/frontliner/settings/edit">Profile</a>
+                @endif
                 </div>
                 <div class="p-2" role="button">
                   <a href="/logout">Logout</a>

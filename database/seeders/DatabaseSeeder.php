@@ -21,11 +21,11 @@ class DatabaseSeeder extends Seeder
         'lastname' => 'Semira',
         'username' => 'admin',
         'email' => 'admin@email.example.com',
-        'contact' => '00000000000',
+        'contact' => '',
         'position' => 'Manager',
         'status' => 'Active',
         'password' => Hash::make("qwer1234"),
-        'profile_photo_path' => 'photos/IHoYLyrAkh6SA5mfz6hnEYfxWp7lD4Ua1j7eDiEb.png',
+        'profile_photo_path' => 'photos/ewydknl22fpMkbemK6epuFF4mYXJ695Fb2PuhLwl.png',
       ]);   
       
       DB::table('qa_reference')->insert([

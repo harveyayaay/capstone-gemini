@@ -12,7 +12,7 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-center px-5">
-            @livewire('file-upload', ["userid" => $data['profile']->id])
+            @livewire('file-upload-profile', ["userid" => $data['profile']->id])
           </div>
         </div>
       </div>
@@ -23,7 +23,6 @@
   <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Edit Employee</h6></div>
     <div class="card">
       <div class="card-body">
-        @livewire('deactivate-account', ["userid" => $data['profile']->id])
         <form action="/supervisor/settings/update/{{$data['profile']->id}}" method="POST">
           @csrf
           <div class="d-flex row col-lg-12">
@@ -37,10 +36,6 @@
               <div class="col-sm-12">
                 <input type="text" class="form-control" name="lastname" id="lastname" value="{{$data['profile']->lastname}}" required>
               </div>
-              <label for="email" class="col-sm-12 col-form-label">Email</label>
-              <div class="col-sm-12">
-                <input type="text" class="form-control" name="email" id="email" value="{{$data['profile']->email}}" required>
-              </div>
             </div>
             <!-- RIGHT COLUMN  -->
             <div class="p-2 flex-fill row col-lg-6">
@@ -48,17 +43,9 @@
               <div class="col-sm-12">
                 <input type="text" class="form-control" name="contact" id="contact" value="{{$data['profile']->contact}}" required>
               </div>
-              <label for="hiredate" class="col-sm-12 col-form-label">Hire Date</label>
+              <label for="email" class="col-sm-12 col-form-label">Email</label>
               <div class="col-sm-12">
-                <input type="date" class="form-control" name="hiredate" id="hiredate" value="{{$data['profile']->hiredate}}" required>
-              </div>
-              <label for="position" class="col-sm-12 col-form-label">Position</label>
-              <div class="col-sm-12">
-                <select name="position" id="position" class="form-control">
-                  <option selected hidden>{{$data['profile']->position}}</option>
-                  <option>Frontliner</option>
-                  <option>Supervisor</option>
-                </select>
+                <input type="text" class="form-control" name="email" id="email" value="{{$data['profile']->email}}" required>
               </div>
               <!-- <label for="status" class="col-sm-12 col-form-label">Status</label>
               <div class="col-sm-12">

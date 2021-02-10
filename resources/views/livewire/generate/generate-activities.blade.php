@@ -1,7 +1,11 @@
 <div>
     {{-- In work, do what you enjoy. --}}
       <div class="d-flex justify-content-end mb-2">
+      @if(Auth::user()->position != 'Frontliner')
         <input type="text" class="form-control-sm col-3 mr-auto" placeholder="-Filter Employee by Name-" name="search" wire:model="search">
+      @else
+        <input type="text" class="form-control-sm col-3 mr-auto" placeholder="-Filter Employee by Name-" name="search" wire:model="search" hidden>
+      @endif
         <div class="m-1"><b>Filter Date: </b></div>
         <input type="date" class="form-control-sm m-1 col-2" value="{{date('Y-m-d', strtotime(date('Y-m')))}}" name="date_from" wire:model="date_from">
         <input type="date" class="form-control-sm m-1 col-2" value="{{date('Y-m-d')}}"  name="date_to" wire:model="date_to"> 

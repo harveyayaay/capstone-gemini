@@ -28,7 +28,7 @@ class EmployeeManagementController extends Controller
     $store_data = [
         'firstname' => $request->firstname, 
         'lastname' => $request->lastname,
-        'username' => Str::lower($request->firstname.''.$request->lastname),
+        'username' => str_replace(' ', '', Str::lower($request->firstname.''.$request->lastname)),
         'email' => $request->email,
         'contact' => $request->contact,
         'hiredate' => $request->hiredate,
