@@ -17,8 +17,34 @@ class GenerateActivities extends Component
   public $process_time;
   public $data;
 
+  // public $reference = 'All';
+  // public $status;
+  // public $search = "p";
+  // public $date_from = '2020-01-01';
+  // public $date_to = '2021-02-11';
+  // public $count;
+  // public $process_time;
+  // public $data;
+
     public function render()
     { 
+            // gets data 
+            // $this->data = DB::table('tasks')
+            // ->join('users', 'tasks.empid', '=', 'users.id')
+            // ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+            // ->where(function($query){
+            //     $query
+            //       ->where('users.firstname','LIKE', "%" . $this->search . "%")
+            //       ->orWhere('users.lastname','LIKE', "%" . $this->search . "%");
+            // })
+            // ->where('tasks.status','=',$this->reference)
+            // ->where('tasks.status','=',$this->status)
+            // ->where('tasks.current_date','>=',$this->date_from)
+            // ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+            // ->get();
+
+
+
       if($this->reference == 'All')
       {
         if($this->search == null)
@@ -62,17 +88,19 @@ class GenerateActivities extends Component
         {
             // gets data 
             $this->data = DB::table('tasks')
-            ->join('users', 'tasks.empid', '=', 'users.id')
-            ->where(function($query){
-                $query
-                  ->where('users.firstname','LIKE', "%" . $this->search . "%")
-                  ->orWhere('users.lastname','LIKE', "%" . $this->search . "%");
-            })
-            ->where('tasks.status','=',$this->status)
-            ->where('tasks.current_date','>=',$this->date_from)
-            ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
-            ->get();
-
+              ->join('users', 'tasks.empid', '=', 'users.id')
+              ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+              ->select('tasks.current_date','task_lists.title','tasks.case_num','date_received','tasks.time_start','tasks.time_end','tasks.hold_duration','tasks.process_duration','users.firstname','users.lastname')
+              ->where(function($query){
+                  $query
+                    ->where('users.firstname','LIKE', "%" . $this->search . "%")
+                    ->orWhere('users.lastname','LIKE', "%" . $this->search . "%");
+              })
+              ->where('tasks.status','=',$this->status)
+              ->where('tasks.current_date','>=',$this->date_from)
+              ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+              ->get();
+            
             // gets process time 
             $process_time['time'] = DB::table('tasks')
               ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
@@ -113,7 +141,6 @@ class GenerateActivities extends Component
             ->where('tasks.current_date','>=',$this->date_from)
             ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
             ->get();
-
           // gets process time 
           $process_time['time'] = DB::table('tasks')
             ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
@@ -178,7 +205,7 @@ class GenerateActivities extends Component
               ->count();
         }
       }
-        return view('livewire.generate.generate-activities');
+      return view('livewire.generate.generate-activities');
     }
 
     public function mount($status, $reference)

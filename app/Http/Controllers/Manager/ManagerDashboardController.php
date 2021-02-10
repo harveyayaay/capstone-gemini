@@ -14,8 +14,8 @@ class ManagerDashboardController extends Controller
   public function index()
   {
     if(Auth::user()->position == 'Frontliner')
-      return view("manager.dashboard.index");
-    else
       return view("frontliner.dashboard.index");
+    else  
+      return view("manager.dashboard.index");
   }
 }

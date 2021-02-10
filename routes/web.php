@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/admin/generate-report', [ManagerGenerateReportController::class, 'index']);
     
     // PDF
-    Route::get('/generate-pdf-activity/{reference}/{status}/{date_from}/{date_to}', [PDFController::class, 'indexActivity']);
+    Route::get('/generate-pdf-activity/{reference}/{status}/{search}/{date_from}/{date_to}', [PDFController::class, 'indexActivity']);
 
     // PRODUCTIVITY REPORT
     Route::get('/admin/productivity-report', [ProductivityReportController::class, 'index']);

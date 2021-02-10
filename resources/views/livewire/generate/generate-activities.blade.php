@@ -48,7 +48,11 @@
         <!-- <label for="field_title" class="col-form-label-sm">Average Processing Time: {{$process_time}}</label> -->
       </div>
       <div class="d-flex justify-content-end text-center">
-        <a class="form-control-sm col-1 btn-success" href="{{ URL::to('generate-pdf-activity/'.$reference.'/'.$status.'/'.$date_from.'/'.$date_to) }}">
+        @if($search == null)
+          <a class="form-control-sm col-1 btn-success" href="{{ URL::to('generate-pdf-activity/'.$reference.'/'.$status.'/none/'.$date_from.'/'.$date_to) }}">
+        @else
+          <a class="form-control-sm col-1 btn-success" href="{{ URL::to('generate-pdf-activity/'.$reference.'/'.$status.'/'.$search.'/'.$date_from.'/'.$date_to) }}">
+        @endif
           <button>Print</button>
         </a>
       </div>
