@@ -19,13 +19,14 @@ class DeactivateAccount extends Component
       $this->userid = $userid;
     }
 
-    public function save()
+    public function deact()
     {      
         $update_status = [
           'status' => 'Inactive'
         ];
 
         $store = DB::table('users')->where('id',$this->userid)->update($update_status);
+        session()->flash('success', 'Employee Deactivated');
         return redirect()->to('/admin/employee-management');
     }
 }

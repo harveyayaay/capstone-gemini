@@ -7,7 +7,11 @@
 <div class="vertical-nav bg-blue-900 text-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-blue-900 shadow shadow-r">
     <div class="media d-flex align-items-center">
-      <img loading="lazy" src="https://lh3.googleusercontent.com/proxy/j2eGnCWLhsMeLm8Hcn3of3ExBrPieP3lvI4qzASVHd-VPP9XaEas1D4nVBJ-wmzUJ9UjsQ7dRoTspvNz9a9H4xKlq0BJntBc8-AG12jcWI4Fp8i8oK9xnlKNhOB2SUVG40E" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+    @if(Auth::user()->profile_photo_path == null)
+      <img loading="lazy" src="{{ URL::asset('storage/photos/ewydknl22fpMkbemK6epuFF4mYXJ695Fb2PuhLwl.png') }}" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+    @else
+      <img loading="lazy" src="{{ URL::asset('storage/'.Auth::user()->profile_photo_path) }}" alt="..." width="80" height="80" class="mr-3 rounded-circle img-thumbnail shadow-sm">
+    @endif  
       <div class="media-body">
         <h5 class="m-0">{{ Auth::user()->firstname.' '.Auth::user()->lastname}}</h5>
         @if(Auth::user()->position == "Manager")

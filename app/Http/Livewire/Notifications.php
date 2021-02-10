@@ -33,6 +33,7 @@ class Notifications extends Component
         
       $data['count'] = DB::table('notifications')
         ->where('empid',Auth::user()->id)
+        ->where('seen',false)
         ->count();
       
       foreach($data['notifs'] as $notifs)
@@ -48,8 +49,14 @@ class Notifications extends Component
       return view('livewire.notifications');
     }
 
-    public function seen()
+    public function read()
     {
-      $this->seen = true;
+      $update_data = [
+        'read' => true, 
+      ];
+
+      $update = DB::table('notifications')->where('id',$this->notifid)->update($update_data);
+
+      return redirect()->to('/frontliner/scorecard-management');
     }
 }

@@ -17,15 +17,6 @@ class GenerateActivities extends Component
   public $process_time;
   public $data;
 
-  // public $reference = 'All';
-  // public $status;
-  // public $search = "p";
-  // public $date_from = '2020-01-01';
-  // public $date_to = '2021-02-11';
-  // public $count;
-  // public $process_time;
-  // public $data;
-
     public function render()
     { 
             // gets data 

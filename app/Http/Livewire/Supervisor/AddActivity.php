@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Frontliner;
+namespace App\Http\Livewire\Supervisor;
 
 use Livewire\Component;
 use DB;
@@ -37,7 +37,7 @@ class AddActivity extends Component
 
       $this->task_lists = $data['task_lists'];
 
-      return view('livewire.frontliner.add-activity');
+      return view('livewire.supervisor.add-activity');
     }
 
     public function mount()
@@ -71,6 +71,6 @@ class AddActivity extends Component
       
       $store = DB::table('tasks')->insert($store_data);
       session()->flash('success', 'Activity is now Ongoing');
-      return redirect()->to('/frontliner/activity-tracker');
+      return redirect()->to('/supervisor/activity-tracker');
     }
 }

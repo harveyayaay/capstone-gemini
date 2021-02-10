@@ -15,20 +15,20 @@ class ScorecardManagement extends Component
 
     public $action; // add or edit
     public $page; // page shown
-    public $title;
-    public $type;
-    public $type_last;
-    public $samplegoal;
-    public $goal;
+    public $title = 'gago';
+    public $type = 'Time';
+    public $type_last = 'Time';
+    public $samplegoal = '00:05:00';
+    public $goal = 300;
     public $references;
-    public $reference;
+    public $reference = 'All';
     public $next; // enables/disables net button
 
-    public $percentage1;
-    public $percentage2;
-    public $percentage3;
-    public $percentage4;
-    public $percentage5;
+    public $percentage1 = "175";
+    public $percentage2 = "125";
+    public $percentage3 = "100";
+    public $percentage4 = "90";
+    public $percentage5 = "80";
 
     public $performance_ranges_display = array();
     
@@ -37,7 +37,7 @@ class ScorecardManagement extends Component
       if($metricid == null)
       {
         $this->action = 'add';
-        $this->page = 1;
+        $this->page = 3;
         $this->reference = 'All';
         $this->type = 'Time';
         $this->type_last = 'Volume';
@@ -47,7 +47,7 @@ class ScorecardManagement extends Component
       {
         $this->edit_id = $metricid;
         $this->action = 'edit';
-        $this->page = 3;
+        $this->page = 1;
         $this->next = false;
         $data['edit_metric'] = DB::table('metrics')
           ->where('id',$metricid)
@@ -141,10 +141,10 @@ class ScorecardManagement extends Component
 
       if($this->page == 3)
       {
-
         $performance_ranges_display = array();
         if($this->type == 'Time')
         {
+          $percentages = [];
           $percentages[] = $this->percentage5;
           $percentages[] = $this->percentage4;
           $percentages[] = $this->percentage3;
@@ -199,10 +199,9 @@ class ScorecardManagement extends Component
           $base_time = 100000;
           foreach($percentages as $percentage)
           {
-
               $from[] = ($this->goal / 100) * $percentage;
               $to[] = $base_time;
-              $base_time = (($this->goal / 100) * $percentage) + 1;
+              $base_time = (($this->goal / 100) * $percentage) - 1;
           }
 
           $base_range = 3.0;

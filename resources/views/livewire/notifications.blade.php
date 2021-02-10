@@ -1,5 +1,5 @@
 <div class="dropdown">
-  <a class="" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="seen" wire:click="seen">
+  <a class="" id="dropdownMenu2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" name="seen" wire:model="seen">
     <div class=" text-white text-center p-0 text-center">
       @if($count != null)
         <span class="badge badge-light notif-count bg-danger text-white rounded-circle">{{$count}}</span>
@@ -13,7 +13,7 @@
       <div class="dropdown-header bg-gray-200">Notifications</div>
         @foreach($notifs as $notif)
         <!-- /frontliner/scorecard-management -->
-          <div class="p-2 notif-div" role="button">
+          <div class="p-2 notif-div" role="button" name="read" wire:click="read">
             <div class="ml-3 font-weight-bold text-blue-900 pb-3">{{$notif->message}}</div>
             <p class="ml-3 notif-dates">{{$notif->date}}</p>
           </div>

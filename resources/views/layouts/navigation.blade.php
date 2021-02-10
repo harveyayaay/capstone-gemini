@@ -3,7 +3,9 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
+            @if(Auth::user()->position == "Frontliner")
               @livewire('notifications')
+            @endif
           </li>
           <li class="nav-item dropdown">
             <div class="dropdown">
@@ -12,7 +14,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                 <div class="p-2" role="button">
-                  <a href="/logout">Settings</a>
+                  <a href="/supervisor/settings/edit">Profile</a>
                 </div>
                 <div class="p-2" role="button">
                   <a href="/logout">Logout</a>

@@ -8,6 +8,7 @@
       <div class="d-flex justify-content-end text-center m-3">
         <a  href="/admin/employee-management/add" class="form-control-sm col-lg-2 col-md-2 bg-blue-900 text-white mb-2">Add Employee</a>
       </div>
+      @include('flash-message')
       <div class="row 5-10 pr-3 pl-3">
         <table class="table table-sm ">
           <thead>
@@ -26,8 +27,7 @@
             @if($data->status == 'Active')
             <tr class="row">
               <td class="col-1 text-center">
-                <!-- <img src="{{$data->profile_photo_path ? url('storage/'.$data->profile_photo_path) : url('storage/photos/IHoYLyrAkh6SA5mfz6hnEYfxWp7lD4Ua1j7eDiEb.png')}}"  class="rounded-circle shadow-sm  img-thumbnail img-fluid imgsize-sm"> -->
-                <img src="https://lh3.googleusercontent.com/proxy/j2eGnCWLhsMeLm8Hcn3of3ExBrPieP3lvI4qzASVHd-VPP9XaEas1D4nVBJ-wmzUJ9UjsQ7dRoTspvNz9a9H4xKlq0BJntBc8-AG12jcWI4Fp8i8oK9xnlKNhOB2SUVG40E"  class="rounded-circle shadow-sm  img-thumbnail img-fluid imgsize-sm">
+                <img src="{{$data->profile_photo_path ? url('storage/'.$data->profile_photo_path) : url('storage/photos/ewydknl22fpMkbemK6epuFF4mYXJ695Fb2PuhLwl.png')}}"  class="rounded-circle shadow-sm  img-thumbnail img-fluid imgsize-sm">
               </td>
               <td class="col-2 pt-3">{{$data->firstname}} {{$data->lastname}}</td>
               <td class="col-2 pt-3">{{$data->email}}</td>

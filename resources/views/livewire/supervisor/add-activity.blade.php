@@ -1,6 +1,6 @@
 <div>
   <!-- ADD ACTIVITY -->
-  <form action="/frontliner/activity-tracker/store" method="post">
+  <form action="/supervisor/activity-tracker/store" method="post">
   @csrf
     <div class="card mt-4">
       <div class="card-body"> 
