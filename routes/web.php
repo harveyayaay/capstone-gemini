@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Settings\SettingsController;
 
 use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
@@ -38,6 +39,7 @@ Route::get('/', function () {
 
 // Route::get('/', [LandingPageController::class, 'index']);
 
+
 // MANAGER
 Route::middleware('auth')->group(function(){
   Route::middleware('user:Manager')->group(function(){
@@ -72,6 +74,11 @@ Route::middleware('auth')->group(function(){
 
     // PRODUCTIVITY REPORT
     Route::get('/admin/productivity-report', [ProductivityReportController::class, 'index']);
+
+    
+    // SETTINGS
+    Route::get('/admin/settings/edit', [SettingsController::class, 'edit']);
+    Route::post('/admin/settings/update/{id}', [SettingsController::class, 'update']);
     
   });
 });
@@ -97,6 +104,10 @@ Route::middleware('auth')->group(function(){
     
     // GENERATE REPORT
     Route::get('/supervisor/generate-report', [SupervisorGenerateReportController::class, 'index']);
+    
+    // SETTINGS
+    Route::get('/supervisor/settings/edit', [SettingsController::class, 'edit']);
+    Route::post('/supervisor/settings/update/{id}', [SettingsController::class, 'update']);
   });
 });
 
@@ -121,6 +132,10 @@ Route::middleware('auth')->group(function(){
     
     // GENERATE REPORT
     Route::get('/frontliner/generate-report', [SupervisorGenerateReportController::class, 'index']);
+    
+    // SETTINGS
+    Route::get('/frontliner/settings/edit', [SettingsController::class, 'edit']);
+    Route::post('/frontliner/settings/update/{id}', [SettingsController::class, 'update']);
   });
 });
 

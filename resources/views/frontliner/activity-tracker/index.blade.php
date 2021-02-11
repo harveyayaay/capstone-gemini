@@ -58,7 +58,7 @@
   </div>
 @else
 
-  @livewire('supervisor.add-activity')
+  @livewire('frontliner.add-activity')
 
   @if($countHold > 0)
     <!-- ON-HOLD ACTIVITIES  -->

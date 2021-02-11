@@ -17,15 +17,6 @@ class GenerateActivities extends Component
   public $process_time;
   public $data;
 
-  // public $reference = 'All';
-  // public $status;
-  // public $search = "p";
-  // public $date_from = '2020-01-01';
-  // public $date_to = '2021-02-11';
-  // public $count;
-  // public $process_time;
-  // public $data;
-
     public function render()
     { 
             // gets data 
@@ -49,7 +40,48 @@ class GenerateActivities extends Component
       {
         if($this->search == null)
         {
-            // gets data 
+          
+          if(Auth::user()->position != 'Frontliner')
+          {
+              // gets data 
+                $this->data = DB::table('tasks')
+                ->join('users', 'tasks.empid', '=', 'users.id')
+                ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+                ->select('tasks.*', 'users.firstname', 'users.lastname', 'task_lists.title')
+                ->where('tasks.status','=',$this->status)
+                ->where('tasks.current_date','>=',$this->date_from)
+                ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+                ->get();
+
+              // gets process time 
+              $process_time['time'] = DB::table('tasks')
+                ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
+                ->where('status','=',$this->status)
+                ->whereDate('current_date','>=',$this->date_from)
+                ->whereDate('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+                ->first();
+              foreach($process_time['time'] as $secondsProcessedTime)
+              {
+                // converts process time from seconds to H:i:s format
+                $hourDifference = intval($secondsProcessedTime/3600);
+                $remainingSeconds = $secondsProcessedTime - ($hourDifference * 3600);
+                $minDifference = intval($remainingSeconds/60);
+                $remainingSeconds = $remainingSeconds - ($minDifference * 60);
+
+                $this->process_time = date('H:i:s', strtotime($hourDifference.':'.$minDifference.':'.$remainingSeconds));
+              }
+              
+
+              $this->count = DB::table('tasks')
+                ->where('status','=',$this->status)
+                ->where('current_date','>=',$this->date_from)
+                ->where('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+                ->count();
+          }
+          else
+          {
+            
+              // gets data 
               $this->data = DB::table('tasks')
               ->join('users', 'tasks.empid', '=', 'users.id')
               ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
@@ -57,32 +89,34 @@ class GenerateActivities extends Component
               ->where('tasks.status','=',$this->status)
               ->where('tasks.current_date','>=',$this->date_from)
               ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+              ->where('users.id',Auth::user()->id)
               ->get();
 
-            // gets process time 
-            $process_time['time'] = DB::table('tasks')
-              ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
-              ->where('status','=',$this->status)
-              ->whereDate('current_date','>=',$this->date_from)
-              ->whereDate('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
-              ->first();
-            foreach($process_time['time'] as $secondsProcessedTime)
-            {
-              // converts process time from seconds to H:i:s format
-              $hourDifference = intval($secondsProcessedTime/3600);
-              $remainingSeconds = $secondsProcessedTime - ($hourDifference * 3600);
-              $minDifference = intval($remainingSeconds/60);
-              $remainingSeconds = $remainingSeconds - ($minDifference * 60);
+              // gets process time 
+              $process_time['time'] = DB::table('tasks')
+                ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
+                ->where('status','=',$this->status)
+                ->whereDate('current_date','>=',$this->date_from)
+                ->whereDate('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+                ->first();
+              foreach($process_time['time'] as $secondsProcessedTime)
+              {
+                // converts process time from seconds to H:i:s format
+                $hourDifference = intval($secondsProcessedTime/3600);
+                $remainingSeconds = $secondsProcessedTime - ($hourDifference * 3600);
+                $minDifference = intval($remainingSeconds/60);
+                $remainingSeconds = $remainingSeconds - ($minDifference * 60);
 
-              $this->process_time = date('H:i:s', strtotime($hourDifference.':'.$minDifference.':'.$remainingSeconds));
-            }
-            
+                $this->process_time = date('H:i:s', strtotime($hourDifference.':'.$minDifference.':'.$remainingSeconds));
+              }
+              
 
-            $this->count = DB::table('tasks')
-              ->where('status','=',$this->status)
-              ->where('current_date','>=',$this->date_from)
-              ->where('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
-              ->count();
+              $this->count = DB::table('tasks')
+                ->where('status','=',$this->status)
+                ->where('current_date','>=',$this->date_from)
+                ->where('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+                ->count();
+          }
         }
         else
         {
@@ -132,37 +166,41 @@ class GenerateActivities extends Component
       {
         if($this->search == null)
         {
-          $this->data = DB::table('tasks')
-            ->join('users', 'tasks.empid', '=', 'users.id')
-            ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
-            ->select('tasks.*', 'users.firstname', 'users.lastname', 'task_lists.title')
-            ->where('task_lists.title','=',$this->reference)
-            ->where('tasks.status','=',$this->status)
-            ->where('tasks.current_date','>=',$this->date_from)
-            ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
-            ->get();
-          // gets process time 
-          $process_time['time'] = DB::table('tasks')
-            ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
-            ->where('status','=',$this->status)
-            ->whereDate('current_date','>=',$this->date_from)
-            ->whereDate('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
-            ->first();
-          foreach($process_time['time'] as $secondsProcessedTime)
+          if(Auth::user()->position != 'Frontliner')
           {
-            // converts process time from seconds to H:i:s format
-            $hourDifference = intval($secondsProcessedTime/3600);
-            $remainingSeconds = $secondsProcessedTime - ($hourDifference * 3600);
-            $minDifference = intval($remainingSeconds/60);
-            $remainingSeconds = $remainingSeconds - ($minDifference * 60);
-
-            $this->process_time = date('H:i:s', strtotime($hourDifference.':'.$minDifference.':'.$remainingSeconds));
+            $this->data = DB::table('tasks')
+              ->join('users', 'tasks.empid', '=', 'users.id')
+              ->join('task_lists', 'tasks.task_lists_id', '=', 'task_lists.id')
+              ->select('tasks.*', 'users.firstname', 'users.lastname', 'task_lists.title')
+              ->where('task_lists.title','=',$this->reference)
+              ->where('tasks.status','=',$this->status)
+              ->where('tasks.current_date','>=',$this->date_from)
+              ->where('tasks.current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+              ->where('users.id',Auth::user()->id)
+              ->get();
+            // gets process time 
+            $process_time['time'] = DB::table('tasks')
+              ->select(DB::raw('AVG(TIME_TO_SEC(process_duration))'))
+              ->where('status','=',$this->status)
+              ->whereDate('current_date','>=',$this->date_from)
+              ->whereDate('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+              ->first();
+            foreach($process_time['time'] as $secondsProcessedTime)
+            {
+              // converts process time from seconds to H:i:s format
+              $hourDifference = intval($secondsProcessedTime/3600);
+              $remainingSeconds = $secondsProcessedTime - ($hourDifference * 3600);
+              $minDifference = intval($remainingSeconds/60);
+              $remainingSeconds = $remainingSeconds - ($minDifference * 60);
+  
+              $this->process_time = date('H:i:s', strtotime($hourDifference.':'.$minDifference.':'.$remainingSeconds));
+            }
+            $this->count = DB::table('tasks')
+              ->where('status','=',$this->status)
+              ->where('current_date','>=',$this->date_from)
+              ->where('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
+              ->count();
           }
-          $this->count = DB::table('tasks')
-            ->where('status','=',$this->status)
-            ->where('current_date','>=',$this->date_from)
-            ->where('current_date','<',date('Y-m-d', strtotime('+1 day',strtotime($this->date_to))))
-            ->count();
         }
         else
         {

@@ -80,10 +80,34 @@ class Dashboard extends Component
         $data['qa_info'] = DB::table('qa_list')
           ->where('empid',$user->id)
           ->first();
-        
+
+        if($data['qa_info'] == null)
+        {
+          DB::table('qa_list')->insert([
+            'empid' => $user->id,
+            'percentage' => 100,
+          ]);
+
+          $data['qa_info'] = DB::table('qa_list')
+            ->where('empid',$user->id)
+            ->first();
+        }
+
         $data['esc_info'] = DB::table('escalations')
           ->where('empid',$user->id)
           ->first();
+        
+        if($data['esc_info'] == null)
+        {
+          DB::table('escalations')->insert([
+            'empid' => $user->id,
+            'escalation' => 0,
+          ]);
+
+        $data['esc_info'] = DB::table('escalations')
+          ->where('empid',$user->id)
+          ->first();
+        }
         
         // Ongoing Tasks
         $data['task_info'] = DB::table('tasks')
@@ -103,7 +127,7 @@ class Dashboard extends Component
             "task_ongoing" => $data['task_info']->title,
           ));
         } 
-
+        
         // Result List of Users Prod 
         array_push($data['list_users_prod'],array(
             "firstname" => $user->firstname,

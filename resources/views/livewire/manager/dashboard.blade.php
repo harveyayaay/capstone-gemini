@@ -2,7 +2,7 @@
   <div class="card col mb-2">
     <div class="card-body"> 
       <div class="d-flex justify-content-end mb-2">
-        <div class="form-control-sm mr-auto"><h6 class="bg-blue-900 p-2 rounded text-white">Overall MTD Volume</h6></div>
+        <div class="form-control-sm mr-auto"><h6 class="p-2 text-blue-900">Overall MTD Volume</h6></div>
         <!-- <input type="submit" class="form-control-sm col-1 btn-primary">  -->
       </div>
       <canvas id="MTDTaskVolume" width="400" height="70"></canvas>

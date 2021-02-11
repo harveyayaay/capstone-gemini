@@ -8,7 +8,8 @@
 
 <div class="d-flex justify-content-center">
   <div class="">
-    <div class="pt-2 pl-2 pb-1 mt-5 bg-blue-900 text-white"><h6>Edit Employee</h6></div>
+      @include('flash-message')
+    <div class="pt-2 pl-2 pb-1 bg-blue-900 text-white"><h6>Edit Employee</h6></div>
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-center px-5">

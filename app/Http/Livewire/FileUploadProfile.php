@@ -7,7 +7,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
-class FileUpload extends Component
+class FileUploadProfile extends Component
 {
   public $photo;
   public $userid;
@@ -53,7 +53,13 @@ class FileUpload extends Component
         $store = DB::table('users')->where('id',$this->userid)->update($update_photo);
 
         session()->flash('success', 'Employee Profile Updated');
-        return redirect()->to('/admin/employee-management/edit/'.$this->userid);
+
+        if(Auth::user()->position == 'Manager')
+          return redirect()->to('/dashboard');
+        elseif(Auth::user()->position == 'Supervisor')
+          return redirect()->to('/dashboard');
+        else
+          return redirect()->to('/frontliner/dashboard');
     }
 
   //   public function createProduct(){

@@ -67,11 +67,11 @@ class ActivityTrackerController extends Controller
       ->get();
     }
 
-    $data['tasks_list'] = DB::table('task_lists')
-      ->where('status','Active')
-      ->get();
-      
-    return view("supervisor.activity-tracker.index", $data);
+    if(Auth::user()->position == 'Frontliner')
+      return view("frontliner.activity-tracker.index", $data);
+    else 
+      return view("supervisor.activity-tracker.index", $data);
+
   }
 
   public function store(Request $request)
@@ -94,7 +94,11 @@ class ActivityTrackerController extends Controller
             'type'    => 'success',
             'message' => 'A section has been successfully added.'
         ];
-        return redirect()->to('/supervisor/activity-tracker')->with('alert',$alert);
+        
+    if(Auth::user()->position == 'Frontliner')
+      return redirect()->to('/frontliner/activity-tracker')->with('alert',$alert);
+    else 
+      return redirect()->to('/supervisor/activity-tracker')->with('alert',$alert);
       
   }
   
@@ -171,7 +175,10 @@ class ActivityTrackerController extends Controller
       'type'    => 'success',
       'message' => 'A section has been successfully updated.'
     ];
-    return redirect()->to('/supervisor/activity-tracker')->with('alert',$alert);
+    if(Auth::user()->position == 'Frontliner')
+      return redirect()->to('/frontliner/activity-tracker')->with('alert',$alert);
+    else 
+      return redirect()->to('/supervisor/activity-tracker')->with('alert',$alert);
 
   }
   

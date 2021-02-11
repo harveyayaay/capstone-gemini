@@ -95,7 +95,11 @@ class PDFController extends Controller
             }
         }
       }
-      $data['average'] = ConvertingTime::convert_time(intval($this->seconds / $this->total));
+      if($this->total == null)
+        $data['average'] = intval($this->seconds);
+      else
+        $data['average'] = ConvertingTime::convert_time(intval($this->seconds / $this->total));
+      
       $data['total'] = $this->total;
       $data['from'] = $date_from;
       $data['to'] = $date_to;
