@@ -2,7 +2,7 @@
   <div class="card mt-3">
     <div class="card-body">
         <div class="row">
-          <div class="d-flex justify-content-center col">
+          <div class="d-flex justify-content-center col ">
             @if($page == 1)
               <span class="rounded-circle bg-blue-900 h-4 w-4"><h1 class="text-center text-white p-2">1</h1></span>
             @else
