@@ -15,20 +15,20 @@ class ScorecardManagement extends Component
 
     public $action; // add or edit
     public $page; // page shown
-    public $title = 'gago';
-    public $type = 'Time';
-    public $type_last = 'Time';
-    public $samplegoal = '00:05:00';
+    public $title;
+    public $type;
+    public $type_last;
+    public $samplegoal;
     public $goal = 300;
     public $references;
     public $reference = 'All';
     public $next; // enables/disables net button
 
-    public $percentage1 = "175";
-    public $percentage2 = "125";
-    public $percentage3 = "100";
-    public $percentage4 = "90";
-    public $percentage5 = "80";
+    public $percentage1;
+    public $percentage2;
+    public $percentage3;
+    public $percentage4;
+    public $percentage5;
 
     public $performance_ranges_display = array();
     
@@ -37,7 +37,7 @@ class ScorecardManagement extends Component
       if($metricid == null)
       {
         $this->action = 'add';
-        $this->page = 3;
+        $this->page = 1;
         $this->reference = 'All';
         $this->type = 'Time';
         $this->type_last = 'Volume';
