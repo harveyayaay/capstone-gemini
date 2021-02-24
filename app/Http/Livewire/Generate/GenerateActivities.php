@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Generate;
 use Livewire\Component;
 use DB;
 use PDF;
+use Illuminate\Support\Facades\Auth;
+
 
 class GenerateActivities extends Component
 {

@@ -16,10 +16,7 @@
     @elseif($reports == 'Incomplete Activities')
       @livewire('generate.generate-activities', ["status" => 'Incomplete', "reference" => 'All'])
     @else
-
     
-
-
     @endif
 </div>
 
