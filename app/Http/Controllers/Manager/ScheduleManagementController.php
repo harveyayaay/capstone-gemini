@@ -11,4 +11,10 @@ class ScheduleManagementController extends Controller
   {
      return view("manager.schedule-management.index");
   }
+
+  public function add(Request $request, $date)
+  {
+    $data['date'] = $date;
+     return view("manager.schedule-management.add", $data);
+  }
 }

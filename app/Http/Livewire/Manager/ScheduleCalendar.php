@@ -6,10 +6,7 @@ use Livewire\Component;
 
 class ScheduleCalendar extends Component
 {
-  public $initial_year_from;
-  public $current_display_year_from;
-  public $initial_year_to;
-
+  public $current_date;
   public $month_picked;
   public $initial_day_display;
   public $set_initial_day;
@@ -59,9 +56,19 @@ class ScheduleCalendar extends Component
     
     public function mount()
     {
-      $this->initial_year_from = date('Y-m-d');
-      $this->current_display_year_from = $this->initial_year_from;
-      $this->initial_year_to = date('Y-m-d', strtotime('+1 year'));
-      $this->month_picked = 'January';
+      $this->current_date = date('Y-m-d');
+      $this->month_picked = date('F', strtotime($this->current_date));
+    }
+    
+    public function prev_month()
+    {
+      $this->current_date = date('Y-m-d', strtotime('-1 month', strtotime($this->current_date)));
+      $this->month_picked = date('F', strtotime($this->current_date));
+    }
+      
+    public function next_month()
+    {
+      $this->current_date = date('Y-m-d', strtotime('+1 month', strtotime($this->current_date)));
+      $this->month_picked = date('F', strtotime($this->current_date));
     }
 }

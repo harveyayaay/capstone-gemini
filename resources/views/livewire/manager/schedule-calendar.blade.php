@@ -1,8 +1,13 @@
 <div>
   <div class="container d-flex justify-content-center">
+    <div class="d-flex justify-content-center col-lg-7 shadow bg-blue-900 text-white">
+      <div class="pt-3">{{date('Y', strtotime($current_date))}}</div>
+    </div>
+  </div>
+  <div class="container d-flex justify-content-center">
     <div class="card-body col-lg-7 shadow p-3 bg-blue-900 text-white">
       <div class="row">
-        <div class="col-1 p-2 ml-2">
+        <div class="col-1 p-2 ml-2" wire:click="prev_month">
           <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </div>
         <div class="col">
@@ -23,7 +28,7 @@
             </select>
           </div>
         </div>
-        <div class="col-1 p-2 mr-2">
+        <div class="col-1 p-2 mr-2" wire:click="next_month">
           <i class="fa fa-chevron-right" aria-hidden="true"></i>
         </div>
       </div>
@@ -54,7 +59,7 @@
                 <tr class="col bg-white text-dark">
               @endif
 
-              <td>{{date('d', strtotime($current_day_display))}}</td>
+              <td><a href="/admin/schedule-management/add-schedule/{{$current_day_display}}" class="text-dark">{{date('d', strtotime($current_day_display))}}</a></td>
               <div class="d-none">{{$current_day_display = date('Y-m-d', strtotime('+1 day', strtotime(date($current_day_display))))}}<div>
             @endwhile
 
