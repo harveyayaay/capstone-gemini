@@ -9,6 +9,7 @@ use App\Http\Controllers\Manager\ManagerDashboardController;
 use App\Http\Controllers\Manager\TrackerManagementController;
 use App\Http\Controllers\Manager\EmployeeManagementController;
 use App\Http\Controllers\Manager\ScorecardManagementController;
+use App\Http\Controllers\Manager\ScheduleManagementController;
 use App\Http\Controllers\Manager\ManagerGenerateReportController;
 use App\Http\Controllers\PDFController;
 
@@ -65,6 +66,9 @@ Route::middleware('auth')->group(function(){
     Route::get('/admin/scorecard-management', [ScorecardManagementController::class, 'index']);
     Route::get('/admin/scorecard-management/add', [ScorecardManagementController::class, 'add']);
     Route::get('/admin/scorecard-management/edit/{id}', [ScorecardManagementController::class, 'edit']);
+
+    // SCHEDULE MANAGEMENT
+    Route::get('/admin/schedule-management', [ScheduleManagementController::class, 'index']);
 
     // GENERATE REPORT
     Route::get('/admin/generate-report', [ManagerGenerateReportController::class, 'index']);

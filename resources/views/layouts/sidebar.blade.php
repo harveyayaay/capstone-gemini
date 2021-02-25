@@ -52,6 +52,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a href="/admin/schedule-management" class="nav-link text-white p-0">
+          <i class="fa fa-picture-o mr-3 text-white fa-fw ml-3"></i>
+            <label class="col-form-label-sm">Schedule</label>
+        </a>
+      </li>
+      <li class="nav-item">
         <a href="/admin/generate-report" class="nav-link text-white p-0">
           <i class="fa fa-picture-o mr-3 text-white fa-fw ml-3"></i>
             <label class="col-form-label-sm">Reports</label>
