@@ -63,7 +63,7 @@
                   @endforeach
                 </select>
               </td>
-            </tr>
+            </tr> 
                 
             @empty
               <div class="d-flex justify-content-center m-3">
