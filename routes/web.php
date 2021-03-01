@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function(){
     // SCHEDULE MANAGEMENT
     Route::get('/admin/schedule-management', [ScheduleManagementController::class, 'index']);
     Route::get('/admin/schedule-management/add-schedule/{date}', [ScheduleManagementController::class, 'add']);
+    Route::get('/admin/schedule-management/view-schedule/{date}', [ScheduleManagementController::class, 'show']);
 
     // GENERATE REPORT
     Route::get('/admin/generate-report', [ManagerGenerateReportController::class, 'index']);

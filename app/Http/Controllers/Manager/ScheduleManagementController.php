@@ -17,4 +17,10 @@ class ScheduleManagementController extends Controller
     $data['date'] = $date;
      return view("manager.schedule-management.add", $data);
   }
+  
+  public function show(Request $request, $date)
+  {
+    $data['date'] = $date;
+     return view("manager.schedule-management.show", $data);
+  }
 }
