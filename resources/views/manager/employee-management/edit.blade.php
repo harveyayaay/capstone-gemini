@@ -50,7 +50,7 @@
           </div>
           <label for="hiredate" class="col-sm-12 col-form-label">Hire Date</label>
           <div class="col-sm-12">
-            <input type="date" class="form-control" name="hiredate" id="hiredate" value="{{$data->hiredate}}" required>
+            <input type="date" class="form-control" name="hiredate" id="hiredate" max="{{date('Y-m-d')}}" value="{{$data->hiredate}}" required>
           </div>
           <label for="position" class="col-sm-12 col-form-label">Position</label>
           <div class="col-sm-12">

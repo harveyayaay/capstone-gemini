@@ -25,43 +25,7 @@ class EmployeeManagementController extends Controller
 
   public function store(Request $request)
   {
-    // dd('gago');
-    $data['users'] = DB::table('users')
-      ->select('username')
-      ->where('username',preg_replace('/[^a-zA-Z0-9]/', '', str_replace(' ', '', Str::lower($request->firstname.''.$request->lastname))))
-      ->first();
-
-    $ctr = 0;
-    while($data['users'] != null){
-      $ctr++;
-      $data['users'] = DB::table('users')
-        ->select('username')
-        ->where('username','admin')
-        ->where('username',preg_replace('/[^a-zA-Z0-9]/', '', str_replace(' ', '', Str::lower($request->firstname.''.$request->lastname))))
-        ->first();
-    }
-    $username = preg_replace('/[^a-zA-Z0-9]/', '', str_replace(' ', '', Str::lower($request->firstname.''.$request->lastname)));
     
-    if($ctr > 0)
-      $username .= $ctr;
-
-    $store_data = [
-        'firstname' => $request->firstname, 
-        'lastname' => $request->lastname,
-        'username' => $username,
-        'email' => $request->email,
-        'contact' => $request->contact,
-        'hiredate' => $request->hiredate,
-        'position' => $request->position,
-        'status' => 'Active',
-        'password' => Hash::make('qwe123!@#QWE'),
-      ];
-    $store = DB::table('users')->insert($store_data);
-    $alert = [
-        'type'    => 'success',
-        'message' => 'A section has been successfully added.'
-    ];
-    return redirect()->to('/admin/employee-management')->with('alert',$alert);
   }
   
   public function edit($id)
