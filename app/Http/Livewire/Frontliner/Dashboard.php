@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Frontliner;
 
 use Livewire\Component;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component
 {
@@ -24,13 +25,32 @@ class Dashboard extends Component
         
         $basedate = date('Y-m-d', strtotime('+1 day', strtotime($basedate)));
       }
+      
+      // User MTD Productivity 
+      $basedate2 = date('Y-m-d', strtotime(date('Y-m')));
+      while($basedate2 <= date('Y-m-d'))
+      {
+        $count2 = DB::table('tasks')
+          ->where('current_date','>=', $basedate2)
+          ->where('current_date','<', date('Y-m-d', strtotime('+1 day', strtotime($basedate2))))
+          ->where('status', 'Completed')
+          ->where('empid', Auth::user()->id)
+          ->count();
+        
+          $data['user_mtd_task_volume'][]= $count2;
+          $data['user_mtd_task_dates'][] = date('F j',strtotime($basedate2));
+        
+        $basedate2 = date('Y-m-d', strtotime('+1 day', strtotime($basedate2)));
+      }
 
       // List of Productivity per Frontliner
       $data['users'] = DB::table('users')
         ->select('id','firstname','lastname')
         ->where('users.status','Active')
         ->where('users.position','Frontliner')
+        ->where('users.id', Auth::user()->id)
         ->get();
+
       $data['list_users_prod'] = array();
 
       $loop = 1;
@@ -75,36 +95,35 @@ class Dashboard extends Component
       }
 
       // dd($data['list_users_prod']);
-
-      $data['titles1'][] = '00:04:12';
-      $data['titles1'][] = '00:02:03';
-      $data['titles1'][] = '00:03:01';
-      $data['titles1'][] = '00:02:01';
-
-      $data['user_count_vol1'][] = 4;
-      $data['user_count_vol1'][] = 2;
-      $data['user_count_vol1'][] = 3;
-      $data['user_count_vol1'][] = 2;
-
-      $data['titles2'][] = '00:03:12';
-      $data['titles2'][] = '00:01:03';
-      $data['titles2'][] = '00:04:00';
-      $data['titles2'][] = '00:00:54';
-
-      $data['user_count_vol2'][] = 3;
-      $data['user_count_vol2'][] = 1;
-      $data['user_count_vol2'][] = 4;
-      $data['user_count_vol2'][] = 1;
       
-      $data['titles3'][] = '00:03:12';
-      $data['titles3'][] = '00:02:03';
-      $data['titles3'][] = '00:03:01';
-      $data['titles3'][] = '00:00:52';
+      $data['list'] = DB::table('task_lists')
+        ->select('id','title')
+        ->where('type', 'Productive')
+        ->where('status', 'Active')
+        ->get();
 
-      $data['user_count_vol3'][] = 3;
-      $data['user_count_vol3'][] = 2;
-      $data['user_count_vol3'][] = 3;
-      $data['user_count_vol3'][] = 1;
+      foreach($data['list'] as $task_list)
+      {
+        $data['task_count'] = DB::table('tasks')
+          ->where('current_date', '>=', date('Y-m-d', strtotime(date('Y-m'))))
+          ->where('current_date', '<=', date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m', strtotime('+1 month'))))))
+          ->where('task_lists_id', $task_list->id)
+          ->where('status', 'Completed')
+          ->where('empid', Auth::user()->id)
+          ->count();
+
+          $data['titles1'][] = $task_list->title;
+          $data['user_count_vol1'][] = $data['task_count'];
+      }
+
+      $data['qa'] = DB::table('qa_list')
+        ->where('empid', Auth::user()->id)
+        ->first()->percentage;
+        
+      $data['esc'] = DB::table('escalations')
+        ->where('empid', Auth::user()->id)
+        ->first()->escalation;
+      
 
       return view('livewire.frontliner.dashboard', $data);
     }

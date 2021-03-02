@@ -54,7 +54,7 @@ class EmployeeManagementController extends Controller
         'hiredate' => $request->hiredate,
         'position' => $request->position,
         'status' => 'Active',
-        'password' => Hash::make('Gemini123'),
+        'password' => Hash::make('qwe123!@#QWE'),
       ];
     $store = DB::table('users')->insert($store_data);
     $alert = [
