@@ -39,6 +39,7 @@ class AddEmployee extends Component
       $this->contact_error_message = '';
       $this->email_error_message = '';
       $this->data_stored = false;
+      $this->position = 'Frontliner';
     }
 
     public function submit()
@@ -110,7 +111,24 @@ class AddEmployee extends Component
             'status' => 'Active',
             'password' => Hash::make('qwe123!@#QWE'),
           ];
-        // $store = DB::table('users')->insert($store_data);
+        $store = DB::table('users')->insert($store_data);
+
+        $data['get_id'] = DB::table('users')
+          ->select('id')
+          ->where('username', $username)
+          ->first();
+          
+        $store_data = [
+          'empid' => $data['get_id']->id,
+          'percentage' => 100.00, 
+        ];
+        $store = DB::table('qa_list')->insert($store_data);
+
+        $store_data = [
+          'escalation' => 0, 
+          'empid' => $data['get_id']->id,
+        ];
+        $store = DB::table('escalations')->insert($store_data);
         
         $this->username = $username;
         $this->password = 'qwe123!@#QWE';
