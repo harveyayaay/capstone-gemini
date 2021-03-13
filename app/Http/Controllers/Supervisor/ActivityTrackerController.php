@@ -68,7 +68,31 @@ class ActivityTrackerController extends Controller
     }
 
     if(Auth::user()->position == 'Frontliner')
-      return view("frontliner.activity-tracker.index", $data);
+    {
+      if(Auth::user()->position == 'Frontliner')
+      {
+        if(date('H:i:s') < '00:18:00')
+        {
+          $data['sched'] = DB::table('schedules')
+            ->where('date',date('Y-m-d'))
+            ->where('empid', Auth::user()->id)
+            ->first();
+        }
+        else
+        {
+          $data['sched'] = DB::table('schedules')
+            ->where('date',date('Y-m-d'))
+            ->where('time', '>=', '00:18:00')
+            ->where('empid', Auth::user()->id)
+            ->first();
+
+        }
+        if($data['sched'] == null)
+          return view("frontliner.schedule.index");
+        else
+          return view("frontliner.activity-tracker.index", $data);
+      }
+    }
     else 
       return view("supervisor.activity-tracker.index", $data);
 

@@ -1,4 +1,13 @@
 <div>
+@if($taskListNull == true)
+  <div class="container pb-5">
+    <div class="d-flex justify-content-center">
+      <div class="d-flex justify-content-center col-lg-10 shadow p-3 bg-blue-900 text-white">
+        <div class="pt-3">No Activity is found in Tracker. <a href="/admin/tracker-management/add" >Add activity here.</a></div>
+      </div>
+    </div>
+  </div>
+@else
   <div class="container pb-5">
     <div class="d-flex justify-content-center">
       <div class="d-flex justify-content-center col-lg-10 shadow p-3 bg-blue-900 text-white">
@@ -161,4 +170,5 @@
       </div>
     </div>
   </div> -->
+@endif
 </div>

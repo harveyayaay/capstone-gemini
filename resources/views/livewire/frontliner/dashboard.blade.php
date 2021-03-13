@@ -2,6 +2,15 @@
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
 </div>
  
+    @if($scheduled_activity_null == true)
+      <div class="card-body col bg-gray-400 text-white mb-3 p-2"> 
+          <span class="text-dark font-weight-bold">No scheduled tasks today</span>
+      </div>
+    @else
+      <div class="card-body col bg-gray-400 text-white mb-3 p-2"> 
+        <span>Priority Task: </span><span class="text-blue-900 font-weight-bold ml-2">{{$task_display->title}}</span>
+      </div>
+    @endif
   <div class="card-body col bg-blue-900 text-white"> 
     Overall MTD Volume
   </div>

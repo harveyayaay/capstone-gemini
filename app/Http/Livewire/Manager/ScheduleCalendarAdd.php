@@ -21,9 +21,20 @@ class ScheduleCalendarAdd extends Component
   public $schedListNull;
   public $taskSelected;
   public $taskChanged;
+  public $taskListNull;
 
     public function render()
     {
+      $data['check_task_lists'] = DB::table('task_lists')
+          ->where('type', 'Productive')
+          ->where('status', 'Active')
+          ->first();
+      if($data['check_task_lists'] == null)
+        $this->taskListNull = true;
+      else
+        $this->taskListNull = false;
+      
+
       $data['frontline_list'] = DB::table('users')
         ->select('id', 'firstname','lastname')
         ->where('position', 'Frontliner')
@@ -54,7 +65,7 @@ class ScheduleCalendarAdd extends Component
           $this->changes = true;
       }
 
-        return view('livewire.manager.schedule-calendar-add', $data);
+      return view('livewire.manager.schedule-calendar-add', $data);
     }
 
     public function mount($date)
