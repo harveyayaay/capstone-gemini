@@ -13,6 +13,7 @@ class ManagerDashboardController extends Controller
 {
   public function index()
   {
+    $data['sched_display'] = '';
     if(Auth::user()->position == 'Frontliner')
       return view("frontliner.dashboard.index");
     else  

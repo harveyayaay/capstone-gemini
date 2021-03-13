@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Dashboard extends Component
 {
+  public $scheduled_activity_null;
     public function render()
     {
       // MTD Productivity 
@@ -124,6 +125,33 @@ class Dashboard extends Component
         ->where('empid', Auth::user()->id)
         ->first()->escalation;
       
+        
+      if(date('H:i:s') < '00:18:00')
+      {
+        $data['sched'] = DB::table('schedules')
+          ->where('date',date('Y-m-d'))
+          ->where('empid', Auth::user()->id)
+          ->first();
+      }
+      else
+      {
+        $data['sched'] = DB::table('schedules')
+          ->where('date',date('Y-m-d'))
+          ->where('time', '>=', '00:18:00')
+          ->where('empid', Auth::user()->id)
+          ->first();
+      }
+
+      if($data['sched'] == null)
+        $this->scheduled_activity_null = true;
+      else
+      {
+        $this->scheduled_activity_null = false;
+
+        $data['task_display'] = DB::table('task_lists')
+          ->where('id', $data['sched']->id)
+          ->first();
+      }
 
       return view('livewire.frontliner.dashboard', $data);
     }
